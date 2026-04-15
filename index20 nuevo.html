@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RE/MAX Sudeste · Boletín Semanal · 14 abril 2026</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  #lock{position:fixed;inset:0;background:#1B3A7A;display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:0}
+  .lbox{background:white;border-radius:16px;padding:32px 28px;width:300px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+  .llogo{font-size:28px;font-weight:800;color:#1B3A7A;letter-spacing:-0.5px;margin-bottom:2px}
+  .lsub{font-size:9px;color:#9A9589;text-transform:uppercase;letter-spacing:1.8px;margin-bottom:6px}
+  .ltag{font-size:9px;color:#DDD9D1;margin-bottom:24px}
+  .llabel{font-size:11px;color:#3D3A34;margin-bottom:8px;text-align:left;font-weight:600}
+  .linput{width:100%;border:1.5px solid #DDD9D1;border-radius:8px;padding:11px 12px;font-size:15px;outline:none;margin-bottom:4px;letter-spacing:2px}
+  .linput:focus{border-color:#1B3A7A}
+  .lbtn{width:100%;background:#1B3A7A;color:white;border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px;letter-spacing:0.5px}
+  .lbtn:active{background:#0C447C}
+  .lerr{font-size:11px;color:#CC1F1A;margin-top:10px;min-height:16px;font-weight:600}
+  :root{
+    --red:#CC1F1A;--blue:#1B3A7A;--blue-mid:#0C447C;--blue-lt:#EEF2FB;
+    --green:#1A6B3C;--green-dk:#27500A;--green-lt:#EAF3DE;
+    --amber:#633806;--amber-lt:#FEF5E7;
+    --gray-100:#F0EEE9;--gray-200:#DDD9D1;--gray-400:#9A9589;
+    --gray-700:#3D3A34;--gray-900:#1A1815;
+    --white:#ffffff;--off:#F8F7F5;
+  }
+  body{
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    background:#E8E6E1;
+    min-height:100vh;
+    padding:12px 0 32px;
+  }
+  .wrap{max-width:420px;margin:0 auto;padding:0 12px}
+
+  /* HEADER */
+  .hdr{background:var(--blue);border-radius:14px;padding:16px 16px 14px;margin-bottom:7px}
+  .hdr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+  .hdr-name{font-size:24px;font-weight:800;color:white;letter-spacing:-0.5px;line-height:1}
+  .hdr-sub{font-size:7px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:1.8px;text-transform:uppercase;margin-top:3px}
+  .hdr-right{text-align:right}
+  .hdr-sem{font-size:10px;font-weight:700;color:rgba(255,255,255,0.85);display:block}
+  .hdr-fecha{font-size:8px;color:rgba(255,255,255,0.45);display:block;margin-top:1px}
+  .hdr-tag{font-size:8px;color:rgba(255,255,255,0.35);border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;margin-top:2px}
+
+  /* SECCIÓN */
+  .sec{background:var(--white);border-radius:12px;padding:12px 13px;margin-bottom:7px;border:0.5px solid var(--gray-200)}
+  .sec-hdr{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+  .stripe{width:3px;border-radius:2px;flex-shrink:0}
+  .sec-label{font-size:6.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400)}
+
+  /* PILLS */
+  .pills{display:grid;gap:5px;margin-bottom:7px}
+  .pills-3{grid-template-columns:repeat(3,1fr)}
+  .pills-1{grid-template-columns:1fr;max-width:160px}
+  .pills-2{grid-template-columns:1fr 1fr}
+  .pill{background:var(--gray-100);border-radius:8px;padding:8px 5px;text-align:center}
+  .pill-label{font-size:6.5px;color:var(--gray-400);margin-bottom:2px}
+  .pill-val{font-size:14px;font-weight:800;color:var(--gray-900);line-height:1.1}
+  .pill-val.red{color:var(--red)}
+  .pill-val.dk{color:var(--gray-700)}
+
+  /* UVA BOX */
+  .uva{background:var(--blue-lt);border-left:3px solid var(--blue);padding:8px 10px;font-size:8.5px;color:var(--blue-mid);line-height:1.6}
+  .uva strong{font-weight:700}
+
+  /* FUENTE */
+  .fuente{font-size:6px;color:var(--gray-400);margin-top:5px;line-height:1.4}
+
+  /* NOTICIAS */
+  .noticia{padding:7px 0;border-bottom:0.5px solid var(--gray-100)}
+  .noticia:last-child{border-bottom:none;padding-bottom:0}
+  .n-cat{font-size:6.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.9px;margin-bottom:2px}
+  .n-txt{font-size:9.5px;color:var(--gray-700);line-height:1.55}
+  .n-src{font-size:6px;color:var(--gray-400);margin-top:2px}
+
+  /* TASAS */
+  .tasa-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid var(--gray-100)}
+  .tasa-row:last-child{border-bottom:none}
+  .tasa-nombre{font-size:9.5px;font-weight:600;color:var(--gray-900)}
+  .tasa-det{font-size:7px;color:var(--gray-400);margin-top:1px}
+  .tasa-val{font-size:12px;font-weight:800}
+
+  /* PORTAL */
+  .portal{background:var(--blue-lt);border-left:3px solid var(--blue);padding:10px 12px;display:flex;align-items:center;gap:12px}
+  .portal-num{font-size:28px;font-weight:800;color:var(--blue);line-height:1}
+  .portal-txt{font-size:8.5px;color:var(--blue-mid);line-height:1.5}
+  .portal-txt strong{font-weight:700}
+
+  /* SUMMARY PILLS */
+  .smry{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:8px}
+  .scard{background:var(--gray-100);border-radius:8px;padding:8px 4px;text-align:center}
+  .scard-val{font-size:14px;font-weight:800;color:var(--gray-900);line-height:1.1}
+  .scard-val.sm{font-size:9px}
+  .scard-label{font-size:6px;color:var(--gray-400);margin-top:2px}
+
+  /* DIVIDER */
+  .divider{border:none;border-top:0.5px solid var(--gray-200);margin:8px 0}
+
+  /* TABLA HEADER */
+  .tbl-hdr{display:grid;grid-template-columns:28px 1fr auto;gap:4px;padding:2px 0 6px;border-bottom:0.5px solid var(--gray-200);margin-bottom:3px}
+  .tbl-hdr span{font-size:6px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:var(--gray-400)}
+
+  /* FILA */
+  .fila{display:grid;grid-template-columns:28px 1fr auto;gap:4px;padding:5px 0;border-bottom:0.5px solid var(--gray-100);align-items:start}
+  .fila:last-of-type{border-bottom:none}
+  .f-fecha{font-size:7.5px;color:var(--gray-400);text-align:center;padding-top:2px}
+  .f-tipo{font-size:6.5px;color:var(--gray-400);margin-bottom:1px;line-height:1.2}
+  .f-dir{font-size:10.5px;font-weight:700;color:var(--gray-900);line-height:1.3}
+  .f-ciudad{font-size:9px;font-weight:700}
+  .f-ciudad.bb{color:var(--blue)}
+  .f-ciudad.int{color:var(--green)}
+  .f-precio{font-size:10px;font-weight:800;color:var(--gray-900);text-align:right;line-height:1.3}
+  .f-agente{font-size:7px;color:var(--gray-700);text-align:right;margin-top:1px}
+  .badge-alq{font-size:6px;background:var(--amber-lt);color:var(--amber);padding:1px 4px;border-radius:3px;font-weight:800;display:inline-block;vertical-align:middle}
+
+  /* FOOTER */
+  .footer{display:flex;justify-content:space-between;align-items:center;padding:8px 4px 0;border-top:0.5px solid var(--gray-200);margin-top:2px}
+  .footer-left{font-size:8.5px;color:var(--gray-700)}
+  .footer-left strong{color:var(--red)}
+  .footer-right{font-size:7px;color:var(--gray-400)}
+
+  /* GRÁFICO SIMPLE (barras CSS) */
+  .chart-wrap{margin:6px 0 8px}
+  .chart-title{font-size:7px;font-weight:700;color:var(--gray-700);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px}
+  .chart-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .chart-lbl{font-size:8px;color:var(--gray-700);width:90px;flex-shrink:0;text-align:right}
+  .chart-bar-wrap{flex:1;background:var(--gray-100);border-radius:3px;height:12px;overflow:hidden}
+  .chart-bar{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:4px}
+  .chart-n{font-size:7.5px;font-weight:800;color:white}
+  .charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+</style>
+</head>
+<body>
+<div id="lock">
+  <div class="lbox">
+    <div class="llogo">REMAX</div>
+    <div class="lsub">Sudeste · Bahía Blanca</div>
+    <div class="ltag">Boletín semanal · uso interno</div>
+    <div class="llabel">Contraseña</div>
+    <input class="linput" id="pwd" type="password" placeholder="••••••••••" onkeydown="if(event.key==='Enter')chk()">
+    <button class="lbtn" onclick="chk()">Ingresar</button>
+    <div class="lerr" id="err"></div>
+  </div>
+</div>
+<script>
+function chk(){
+  var v=document.getElementById('pwd').value;
+  if(v==='Lamadrid129'){
+    document.getElementById('lock').style.display='none';
+    document.body.style.overflow='auto';
+  } else {
+    document.getElementById('err').textContent='Contraseña incorrecta';
+    document.getElementById('pwd').value='';
+    document.getElementById('pwd').focus();
+  }
+}
+document.body.style.overflow='hidden';
+</script>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-top">
+      <div>
+        <div class="hdr-name">REMAX</div>
+        <div class="hdr-sub">Sudeste · Bahía Blanca</div>
+      </div>
+      <div class="hdr-right">
+        <span class="hdr-sem">Boletín semanal</span>
+        <span class="hdr-fecha">14–18 de abril · 2026</span>
+      </div>
+    </div>
+    <div class="hdr-tag">Informe para agentes · uso interno</div>
+  </div>
+
+  <!-- ECONOMÍA -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--red)"></div><span class="sec-label">Indicadores económicos · hoy</span></div>
+    <div class="pills pills-1">
+      <div class="pill"><div class="pill-label">Inflación mar · INDEC</div><div class="pill-val">3,4%</div></div>
+    </div>
+    <div class="uva"><strong>Crédito UVA —</strong> Tasas desde 6%+UVA en Nación. La inflación de marzo fue 3,4% · INDEC 14/04/2026. Con inflación estabilizada, las cuotas crecen menos.</div>
+    <div class="fuente">Fuente: indec.gob.ar · IPC marzo 2026 · publicado 14/04/2026</div>
+  </div>
+
+  <!-- CAC -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--gray-700)"></div><span class="sec-label">Índice CAC · febrero 2026</span></div>
+    <div class="pills pills-1">
+      <div class="pill"><div class="pill-label">Materiales</div><div class="pill-val red">+1,06%</div></div>
+      <div class="pill"><div class="pill-label">Mano de obra</div><div class="pill-val red">+1,71%</div></div>
+      <div class="pill"><div class="pill-label">General</div><div class="pill-val dk">+1,27%</div></div>
+    </div>
+    <div class="fuente">Fuente: infoconstruir.com.ar/indice-cac-febrero-2026 · publicado 23/02/2026</div>
+  </div>
+
+  <!-- NOTICIAS -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--blue)"></div><span class="sec-label">Mercado inmobiliario nacional</span></div>
+    <div class="noticia">
+      <div class="n-cat" style="color:var(--blue)">Crédito UVA</div>
+      <div class="n-txt">Banco Nación lidera con 6%+UVA y aprobación digital en 24 hs. Concentra el 76% del mercado hipotecario nacional.</div>
+      <div class="n-src">infobae.com · "Un solo banco concentró el 76% de los créditos hipotecarios" · 25/02/2026</div>
+    </div>
+    <div class="noticia">
+      <div class="n-cat" style="color:var(--green-dk)">Precios usados</div>
+      <div class="n-txt">El m² usado subió 8–12% interanual en dólares donde más créditos se colocaron. Stock listo para escriturar, el más buscado.</div>
+      <div class="n-src">infobae.com · "Claves para invertir en el mercado inmobiliario" · abril 2026</div>
+    </div>
+    <div class="noticia">
+      <div class="n-cat" style="color:var(--amber)">Alquileres</div>
+      <div class="n-txt">Sin ley de alquileres, rentabilidad supera 6% anual en ciudades del interior. Oferta normalizada.</div>
+      <div class="n-src">bbvaresearch.com · "Situación Construcción e Inmobiliaria 2026 Argentina" · 11/03/2026</div>
+    </div>
+    <div class="noticia">
+      <div class="n-cat" style="color:var(--blue-mid)">Mercado</div>
+      <div class="n-txt">2025 fue el cuarto mejor año histórico del crédito hipotecario con 44.305 préstamos otorgados a nivel nacional.</div>
+      <div class="n-src">newsweek.com.ar · "Mercado inmobiliario: tres datos para entender el inicio de 2026" · 06/03/2026</div>
+    </div>
+  </div>
+
+  <!-- TASAS -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--blue)"></div><span class="sec-label">Tasas hipotecarias UVA · abril 2026</span></div>
+    <div class="tasa-row"><div><div class="tasa-nombre">Banco Nación</div><div class="tasa-det">30 años · 75% · cuenta sueldo</div></div><div class="tasa-val" style="color:var(--green-dk)">6% + UVA</div></div>
+    <div class="tasa-row"><div><div class="tasa-nombre">ICBC</div><div class="tasa-det">20 años · 80% · haberes</div></div><div class="tasa-val" style="color:#185FA5">6,9% + UVA</div></div>
+    <div class="tasa-row"><div><div class="tasa-nombre">BBVA</div><div class="tasa-det">30 años · 80% · plan sueldo</div></div><div class="tasa-val" style="color:#185FA5">7,5% + UVA</div></div>
+    <div class="tasa-row"><div><div class="tasa-nombre">Santander</div><div class="tasa-det">20 años · acredita sueldo</div></div><div class="tasa-val" style="color:#854F0B">9,5% + UVA</div></div>
+    <div class="tasa-row"><div><div class="tasa-nombre">Galicia · Macro · Supervielle</div><div class="tasa-det">20 años · 65–70%</div></div><div class="tasa-val" style="color:var(--gray-400)">15% + UVA</div></div>
+    <div class="fuente" style="margin-top:6px">Ref. USD 70.000 · 25% anticipo · 20 años · cuota máx. 25% ingreso familiar<br>Fuente: ambito.com · "Créditos hipotecarios: qué bancos bajaron las tasas" · marzo 2026</div>
+  </div>
+
+  <!-- CARTERA -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--blue)"></div><span class="sec-label">Cartera publicada · RE/MAX Sudeste</span></div>
+    <div class="portal">
+      <div class="portal-num">797</div>
+      <div class="portal-txt"><strong>propiedades publicadas</strong><br>remax.com.ar/sudeste · al 14/04/2026</div>
+    </div>
+    <div class="fuente">Fuente: remax.com.ar/sudeste · al 14/04/2026</div>
+  </div>
+
+  <!-- RESERVAS -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--red)"></div><span class="sec-label">Reservas del mes · RE/MAX Sudeste</span></div>
+    <div class="smry" style="grid-template-columns:1fr 1fr">
+      <div class="scard"><div class="scard-val sm">01–14 abril</div><div class="scard-label">acumulado mes</div></div>
+      <div class="scard"><div class="scard-val sm">BB · interior</div><div class="scard-label">localidades</div></div>
+    </div>
+
+    <div class="charts-2col">
+      <div class="chart-wrap">
+        <div class="chart-title">Por tipología</div>
+        <div class="chart-row"><div class="chart-lbl">Departamento</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:100%;background:var(--blue)"><span class="chart-n">7</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Casa</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:71%;background:var(--red)"><span class="chart-n">5</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Lote</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:43%;background:var(--green-dk)"><span class="chart-n">3</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">PH · Local · Otros</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:43%;background:var(--gray-400)"><span class="chart-n">3</span></div></div></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Por ciudad</div>
+        <div class="chart-row"><div class="chart-lbl">Bahía Blanca</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:100%;background:var(--blue)"><span class="chart-n">15</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Monte Hermoso</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:13%;background:var(--green)"><span class="chart-n">2</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Tornquist</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:7%;background:var(--green-dk)"><span class="chart-n">1</span></div></div></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="tbl-hdr">
+      <span>Fecha</span><span>Tipología · Dirección · Ciudad</span><span style="text-align:right">Precio</span>
+    </div>
+
+    <div class="fila"><div class="f-fecha">14/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Los Camarones 1450 <span class="f-ciudad int">Monte Hermoso</span></div></div><div class="f-precio">USD 100.000</div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Local</div><div class="f-dir">Pedro Pico 254 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 15.000</div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">11 de Abril 474 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 180.000</div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Ricardo Güiraldes <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 32.400</div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Ayolas 800 P1 DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 45.000</div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Otros</div><div class="f-dir">Montevideo 270 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 400.000</div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Vicente López 109 P2 D2 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 46.500</div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Gorriti 6 P1 D5 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 49.000</div></div>
+    <div class="fila"><div class="f-fecha">09/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Cerrito 2104 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 150.000</div></div>
+    <div class="fila"><div class="f-fecha">09/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Paula Albarracín 1300 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 50.000</div></div>
+    <div class="fila"><div class="f-fecha">09/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Paraná 63 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 165.000</div></div>
+    <div class="fila"><div class="f-fecha">08/04</div><div><div class="f-tipo">PH</div><div class="f-dir">Av. Colón 192 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 90.000</div></div>
+    <div class="fila"><div class="f-fecha">08/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">12 de Octubre 327 PB DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 54.500</div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Mallea 822 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 98.000</div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Nicaragua 1400 P2 DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 59.000</div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Malvinas 5900 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div class="f-precio">USD 20.000</div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Pavon 726 <span class="f-ciudad int">Tornquist</span></div></div><div class="f-precio">USD 35.000</div></div>
+    <div class="fila"><div class="f-fecha">01/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Av. Costanera 1139 P1 DA <span class="f-ciudad int">Monte Hermoso</span></div></div><div class="f-precio">USD 230.000</div></div>
+    <div class="fuente">Fuente: Estadisticas-20260414_124055.xls · sistema RE/MAX Sudeste · reservas 01–14/04/2026</div>
+  </div>
+
+  <!-- CAPTACIONES -->
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--green)"></div><span class="sec-label">Captaciones del mes · RE/MAX Sudeste</span></div>
+    <div class="smry">
+      <div class="scard"><div class="scard-val">35</div><div class="scard-label">captaciones abril</div></div>
+      <div class="scard"><div class="scard-val sm">BB · interior</div><div class="scard-label">localidades</div></div>
+      <div class="scard"><div class="scard-val sm">01–14 abril</div><div class="scard-label">acumulado del mes</div></div>
+    </div>
+
+    <div class="charts-2col">
+      <div class="chart-wrap">
+        <div class="chart-title">Por tipología</div>
+        <div class="chart-row"><div class="chart-lbl">Departamento</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:100%;background:var(--blue)"><span class="chart-n">16</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Casa</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:50%;background:var(--red)"><span class="chart-n">8</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Lote</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:44%;background:var(--green-dk)"><span class="chart-n">7</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">PH</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:13%;background:var(--gray-400)"><span class="chart-n">2</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Otros</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:13%;background:var(--gray-400)"><span class="chart-n">2</span></div></div></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Por ciudad</div>
+        <div class="chart-row"><div class="chart-lbl">Bahía Blanca</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:100%;background:var(--blue)"><span class="chart-n">28</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Tornquist</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:14%;background:var(--green)"><span class="chart-n">4</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Monte Hermoso</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:7%;background:var(--green-dk)"><span class="chart-n">2</span></div></div></div>
+        <div class="chart-row"><div class="chart-lbl">Cnel. Dorrego</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:4%;background:var(--gray-400)"><span class="chart-n">1</span></div></div></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="tbl-hdr">
+      <span>Fecha</span><span>Tipología · Dirección · Ciudad</span><span style="text-align:right">Precio · Agente</span>
+    </div>
+
+    <div class="fila"><div class="f-fecha">14/04</div><div><div class="f-tipo">PH</div><div class="f-dir">Güemes 220 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">ARS $950k</div><div class="f-agente">M.E. Marchesi</div></div></div>
+    <div class="fila"><div class="f-fecha">14/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Plunkett 3868 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 84.000</div><div class="f-agente">J. Montero</div></div></div>
+    <div class="fila"><div class="f-fecha">14/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Newton 913 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 92.000</div><div class="f-agente">V. González</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Coronel Falcón 1962 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 95.000</div><div class="f-agente">G. Gimenez</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Julio A. Roca 65 P1 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 65.000</div><div class="f-agente">S. Micheletto</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Departamento <span class="badge-alq">ALQ</span></div><div class="f-dir">Av. Alem 1861 P1 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">ARS $500k</div><div class="f-agente">S. Micheletto</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Casa <span class="badge-alq">ALQ</span></div><div class="f-dir">Tucumán 295 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">ARS $1.800k</div><div class="f-agente">S. Micheletto</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Puleston 440 <span class="f-ciudad int">Coronel Dorrego</span></div></div><div><div class="f-precio">USD 29.000</div><div class="f-agente">G. Werneke</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Av. Argentina 250 P1 <span class="f-ciudad int">Monte Hermoso</span></div></div><div><div class="f-precio">USD 105.000</div><div class="f-agente">G. Werneke</div></div></div>
+    <div class="fila"><div class="f-fecha">13/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Thompons 746 PB D2 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 52.000</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Cochera</div><div class="f-dir">Fitz Roy 76 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 7.500</div><div class="f-agente">L. Isasi</div></div></div>
+    <div class="fila"><div class="f-fecha">10/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Alsina 512 P9 DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 95.000</div><div class="f-agente">L. Kremenchutzky</div></div></div>
+    <div class="fila"><div class="f-fecha">09/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Alsina 512 P7 DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 95.000</div><div class="f-agente">L. Kremenchutzky</div></div></div>
+    <div class="fila"><div class="f-fecha">09/04</div><div><div class="f-tipo">PH</div><div class="f-dir">Berutti 853 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 68.000</div><div class="f-agente">F. Muñiz</div></div></div>
+    <div class="fila"><div class="f-fecha">08/04</div><div><div class="f-tipo">Departamento <span class="badge-alq">ALQ</span></div><div class="f-dir">Prov. Unidas 900 P2 D7 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">ARS $650k</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fila"><div class="f-fecha">08/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Saavedra 118 P7 DH <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 80.000</div><div class="f-agente">C. De Lasa</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">General Paz 400 P8 D5 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 97.700</div><div class="f-agente">L. Kremenchutzky</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Vicente López 109 P2 D2 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 49.500</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">General Paz 400 P5 D5 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 88.800</div><div class="f-agente">M.E. Marchesi</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Mitre y Montevideo <span class="f-ciudad int">Tornquist</span></div></div><div><div class="f-precio">USD 33.000</div><div class="f-agente">M. Baltar</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Panamá 1450 P1 D1 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 33.000</div><div class="f-agente">L. Konjovic</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Belgrano 345 P3 DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 199.000</div><div class="f-agente">R. Marras Remenar</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Galpón <span class="badge-alq">ALQ</span></div><div class="f-dir">Mariano Reynal 4100 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">ARS $2.500k</div><div class="f-agente">Y. Amalfi</div></div></div>
+    <div class="fila"><div class="f-fecha">07/04</div><div><div class="f-tipo">Departamento <span class="badge-alq">ALQ</span></div><div class="f-dir">Entre Ríos 254 P0 D5 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">ARS $670k</div><div class="f-agente">M. Zapata</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Fragata Sarmiento 7100 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 10.000</div><div class="f-agente">R. Marras Remenar</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Pellegrini 5079 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 159.000</div><div class="f-agente">J. Gomez</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Estomba 143 P11 D2 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 63.000</div><div class="f-agente">C. Sosa</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Esteban Dufaur 200 <span class="f-ciudad int">Monte Hermoso</span></div></div><div><div class="f-precio">USD 300.000</div><div class="f-agente">Y. Amalfi</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Casa <span class="badge-alq">ALQ</span></div><div class="f-dir">Los Cipreses 456 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 2.000</div><div class="f-agente">M. Baltar</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Lote 92 Etapa 2 <span class="f-ciudad int">Tornquist</span></div></div><div><div class="f-precio">USD 19.999</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Lote s/n <span class="f-ciudad int">Tornquist</span></div></div><div><div class="f-precio">USD 35.000</div><div class="f-agente">M.E. Ibañez</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Rufino Luro Cambaceres 2871 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 24.900</div><div class="f-agente">R. Belén</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Casa</div><div class="f-dir">Patricios 820 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 100.000</div><div class="f-agente">G. Baratelli</div></div></div>
+    <div class="fila"><div class="f-fecha">06/04</div><div><div class="f-tipo">Lote</div><div class="f-dir">Tornquist s/n <span class="f-ciudad int">Tornquist</span></div></div><div><div class="f-precio">USD 19.999</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fila"><div class="f-fecha">01/04</div><div><div class="f-tipo">Departamento</div><div class="f-dir">Nicaragua 1400 P2 DA <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div class="f-precio">USD 59.000</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fuente">Fuente: Estadisticas-20260414_123708.xls · sistema RE/MAX Sudeste · captaciones 01–14/04/2026</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hdr"><div class="stripe" style="height:11px;background:var(--red)"></div><span class="sec-label">Bajas de precio · semana 7–14 abril · RE/MAX Sudeste</span></div>
+    <div class="smry" style="grid-template-columns:1fr 1fr;margin-bottom:10px">
+      <div class="scard"><div class="scard-val">29</div><div class="scard-label">propiedades</div></div>
+      <div class="scard"><div class="scard-val">16</div><div class="scard-label">agentes</div></div>
+    </div>
+    <div class="tbl-hdr" style="grid-template-columns:26px 1fr auto">
+      <span>Fecha</span><span>Tipo · Ciudad · Dirección</span><span style="text-align:right">Variación · Agente</span>
+    </div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Cochera <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓45,5%</span></div><div class="f-dir">Belgrano 153 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 22.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 12.000</div><div class="f-agente">G. Baratelli</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓45,5%</span></div><div class="f-dir">Belgrano 153 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 44.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 24.000</div><div class="f-agente">G. Baratelli</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">13/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓34,3%</span></div><div class="f-dir">M.C. Victorica 2336 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 69.999</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 46.000</div><div class="f-agente">S. Algañaraz</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">14/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓29,2%</span></div><div class="f-dir">2 de Abril 768 <span class="f-ciudad int">Cnel. Rosales</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 24.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 17.000</div><div class="f-agente">G. Baratelli</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">13/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓28,6%</span></div><div class="f-dir">Frente al mar <span class="f-ciudad int">Monte Hermoso</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 420.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 300.000</div><div class="f-agente">J.F. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓25,0%</span></div><div class="f-dir">Calle 13 <span class="f-ciudad int">Cnel. Rosales</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 39.998</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 29.998</div><div class="f-agente">F. Muñiz</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓20,0%</span></div><div class="f-dir">Fitz Roy 241 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 150.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 120.000</div><div class="f-agente">S. Orellano</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">13/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓16,2%</span></div><div class="f-dir">Lote 11 Etapa 1 <span class="f-ciudad int">Tornquist</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 17.900</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 15.000</div><div class="f-agente">J.F. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">13/04</div><div><div class="f-tipo">Departamento <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓16,0%</span></div><div class="f-dir">Pueyrredón 5 P5 DB <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 106.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 89.000</div><div class="f-agente">M.E. Ibañez</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">08/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓14,3%</span></div><div class="f-dir">Esteban Dufaur 1100 <span class="f-ciudad int">Monte Hermoso</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 35.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 30.000</div><div class="f-agente">A. Speranza</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">07/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓13,3%</span></div><div class="f-dir">Güemes 2220 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 90.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 78.000</div><div class="f-agente">L. Isasi</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">08/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓13,3%</span></div><div class="f-dir">Salinas Chicas 4250 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 15.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 13.000</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">09/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓13,3%</span></div><div class="f-dir">Alfonsina Storni <span class="f-ciudad int">Tornquist</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 30.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 26.000</div><div class="f-agente">S. Orellano</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">09/04</div><div><div class="f-tipo">Departamento <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓13,0%</span></div><div class="f-dir">Río Asunción 88 P0 D6 <span class="f-ciudad int">Monte Hermoso</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 68.998</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 59.998</div><div class="f-agente">F. Muñiz</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Oficina <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓12,8%</span></div><div class="f-dir">Luis María Drago 26 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 149.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 130.000</div><div class="f-agente">J.F. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">14/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓10,2%</span></div><div class="f-dir">Coronel Falcón 691 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 49.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 44.000</div><div class="f-agente">M.F. Laiuppa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓9,1%</span></div><div class="f-dir">Lote 304 Pago Chico <span class="f-ciudad int">Punta Alta</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 198.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 180.000</div><div class="f-agente">M.F. Laiuppa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">09/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓8,6%</span></div><div class="f-dir">Erize s/n <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 35.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 32.000</div><div class="f-agente">V. González</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">13/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓8,3%</span></div><div class="f-dir">Perú 4100 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 278.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 255.000</div><div class="f-agente">F. De la Prieta</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓8,0%</span></div><div class="f-dir">11 de Abril 171 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 75.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 69.000</div><div class="f-agente">J.F. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Lote <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓7,3%</span></div><div class="f-dir">Las Piedras <span class="f-ciudad int">Tornquist</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 48.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 44.500</div><div class="f-agente">C. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">09/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓5,6%</span></div><div class="f-dir">Rondeau 572 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 270.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 255.000</div><div class="f-agente">L. Kremenchutzky</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">07/04</div><div><div class="f-tipo">PH <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓4,5%</span></div><div class="f-dir">Castelli 26 P2 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 109.900</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 104.900</div><div class="f-agente">A. Muñoz de Toro</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">14/04</div><div><div class="f-tipo">Departamento <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓4,5%</span></div><div class="f-dir">Estomba 143 P11 D2 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 66.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 63.000</div><div class="f-agente">C. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">08/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓3,7%</span></div><div class="f-dir">Eduardo Gutiérrez 309 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 135.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 130.000</div><div class="f-agente">M.E. Ibañez</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓1,1%</span></div><div class="f-dir">Entre Ríos 670 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 79.900</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 79.000</div><div class="f-agente">J.F. Sosa</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">10/04</div><div><div class="f-tipo">PH <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓0,8%</span></div><div class="f-dir">Darwin 523 P1 D1 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 65.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 64.500</div><div class="f-agente">P. Auday</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">14/04</div><div><div class="f-tipo">Casa <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓0,6%</span></div><div class="f-dir">Salliquello 891 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 180.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 179.000</div><div class="f-agente">P. Auday</div></div></div>
+    <div class="fila" style="grid-template-columns:26px 1fr auto"><div class="f-fecha">08/04</div><div><div class="f-tipo">Local <span style="background:#FCEBEB;color:#A32D2D;font-size:6.5px;padding:1px 4px;border-radius:3px;font-weight:700">↓0,4%</span></div><div class="f-dir">J.A. Roca 1300 <span class="f-ciudad bb">Bahía Blanca</span></div></div><div><div style="text-decoration:line-through;color:var(--red);font-size:9px;text-align:right">USD 25.000</div><div style="color:#1A6B3C;font-size:10px;font-weight:700;text-align:right">USD 24.900</div><div class="f-agente">F. Fioriti</div></div></div>
+    <div class="fuente">Fuente: reporte_de_variacion_de_precios_de_ventas-14042026.csv · sistema RE/MAX Sudeste · semana 7–14/04/2026</div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left"><strong>RE/MAX Sudeste</strong> · Bahía Blanca</div>
+    <div class="footer-right">55 agentes · uso interno · abril 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
