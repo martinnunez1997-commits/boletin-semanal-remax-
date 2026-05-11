@@ -14,6 +14,21 @@
   }
   .container { max-width: 900px; margin: 0 auto; background: white; }
 
+  /* PANTALLA DE EXPIRACIÓN */
+  #expired {
+    position: fixed; inset: 0; background: #fff;
+    display: none; align-items: center; justify-content: center;
+    z-index: 2000;
+  }
+  #expired.show { display: flex; }
+  .expired-box { text-align: center; padding: 40px; max-width: 420px; width: 90%; }
+  .expired-box .icon { font-size: 48px; margin-bottom: 16px; }
+  .expired-box .brand { font-size: 22px; font-weight: 800; color: #003DA5; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .expired-box .brand .red { color: #DC1C2E; }
+  .expired-box h3 { font-size: 18px; color: #1a1a1a; margin: 20px 0 12px; }
+  .expired-box p { font-size: 14px; color: #666; line-height: 1.6; }
+  .expired-box .fecha { font-size: 12px; color: #999; margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee; }
+
   /* LOGIN */
   #login {
     position: fixed; inset: 0; background: #fff;
@@ -325,6 +340,17 @@
 </style>
 </head>
 <body>
+
+<!-- PANTALLA DE EXPIRACIÓN -->
+<div id="expired">
+  <div class="expired-box">
+    <div class="icon">⏱</div>
+    <div class="brand">RE/MAX <span class="red">Sudeste</span></div>
+    <h3>Este boletín ha vencido</h3>
+    <p>Esta edición del boletín ya no está disponible. Solicitá al broker la versión vigente de esta semana.</p>
+    <div class="fecha">Edición: 5–11 de mayo 2026 · vencida el 18/05/2026</div>
+  </div>
+</div>
 
 <!-- LOGIN -->
 <div id="login">
@@ -955,6 +981,10 @@
 </div>
 
 <script>
+// Fecha de expiración: lunes 18/05/2026 a las 00:00
+var EXPIRA = new Date('2026-05-18T00:00:00').getTime();
+var AHORA = new Date().getTime();
+
 function checkPwd(){
   var v = document.getElementById('pwd').value;
   if(v === 'sudeste2026'){
@@ -964,10 +994,17 @@ function checkPwd(){
     document.getElementById('err').innerText = 'Contraseña incorrecta';
   }
 }
-if(sessionStorage.getItem('auth')==='1'){
-  document.getElementById('login').classList.add('hidden');
+
+if (AHORA >= EXPIRA) {
+  document.getElementById('expired').classList.add('show');
+  document.getElementById('login').style.display = 'none';
+  document.querySelector('.container').style.display = 'none';
+} else {
+  if(sessionStorage.getItem('auth')==='1'){
+    document.getElementById('login').classList.add('hidden');
+  }
+  document.getElementById('pwd').focus();
 }
-document.getElementById('pwd').focus();
 </script>
 
 </body>
