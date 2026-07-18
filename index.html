@@ -3,103 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>RE/MAX Sudeste · Boletín Quincenal · 27 mayo 2026</title>
+<title>RE/MAX Sudeste · Boletín Quincenal · 18 julio 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: #f4f4f4;
-    color: #1a1a1a;
-    line-height: 1.5;
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #f4f4f4; color: #1a1a1a; line-height: 1.5; }
   .container { max-width: 900px; margin: 0 auto; background: white; }
-
-  /* PANTALLA DE EXPIRACIÓN */
-  #expired {
-    position: fixed; inset: 0; background: #fff;
-    display: none; align-items: center; justify-content: center;
-    z-index: 2000;
-  }
-  #expired.show { display: flex; }
-  .expired-box { text-align: center; padding: 40px; max-width: 420px; width: 90%; }
-  .expired-box .icon { font-size: 48px; margin-bottom: 16px; }
-  .expired-box .brand { font-size: 22px; font-weight: 800; color: #003DA5; letter-spacing: -0.5px; margin-bottom: 8px; }
-  .expired-box .brand .red { color: #DC1C2E; }
-  .expired-box h3 { font-size: 18px; color: #1a1a1a; margin: 20px 0 12px; }
-  .expired-box p { font-size: 14px; color: #666; line-height: 1.6; }
-  .expired-box .fecha { font-size: 12px; color: #999; margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee; }
-
-  /* LOGIN */
-  #login {
-    position: fixed; inset: 0; background: #fff;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 1000;
-  }
+  #login { position: fixed; inset: 0; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 1000; }
   #login.hidden { display: none; }
   .login-box { text-align: center; padding: 40px; max-width: 360px; width: 90%; }
   .login-box .brand { font-size: 28px; font-weight: 800; color: #003DA5; letter-spacing: -0.5px; }
   .login-box .brand .red { color: #DC1C2E; }
   .login-box .sub { font-size: 13px; color: #666; margin-top: 6px; }
   .login-box .desc { font-size: 12px; color: #888; margin: 18px 0 24px; text-transform: uppercase; letter-spacing: 1px; }
-  .login-box input {
-    width: 100%; padding: 12px 14px; font-size: 15px;
-    border: 1.5px solid #d4d4d4; border-radius: 4px; margin-bottom: 12px;
-    outline: none; transition: border-color 0.15s;
-  }
+  .login-box input { width: 100%; padding: 12px 14px; font-size: 15px; border: 1.5px solid #d4d4d4; border-radius: 4px; margin-bottom: 12px; outline: none; transition: border-color 0.15s; }
   .login-box input:focus { border-color: #003DA5; }
-  .login-box button {
-    width: 100%; padding: 12px; font-size: 14px; font-weight: 600;
-    background: #003DA5; color: white; border: none; border-radius: 4px;
-    cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
-  }
+  .login-box button { width: 100%; padding: 12px; font-size: 14px; font-weight: 600; background: #003DA5; color: white; border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
   .login-box button:hover { background: #002a78; }
   .login-error { color: #DC1C2E; font-size: 12px; margin-top: 8px; min-height: 16px; }
-
-  /* HEADER */
   .header { background: #003DA5; color: white; padding: 28px 40px; }
   .header .brand { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
   .header .brand .red { color: #DC1C2E; }
   .header .titulo { margin-top: 16px; font-size: 22px; font-weight: 700; }
   .header .subtitulo { margin-top: 4px; font-size: 13px; opacity: 0.85; text-transform: uppercase; letter-spacing: 1.5px; }
-
-  /* SECCIONES */
   .section { padding: 30px 40px; border-bottom: 1px solid #e8e8e8; }
-  .section h2 {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 2px; color: #003DA5; margin-bottom: 20px;
-    padding-bottom: 10px; border-bottom: 2px solid #003DA5;
-  }
-
-  /* Secciones grandes (reservas/captaciones/bajas) */
+  .section h2 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #003DA5; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #003DA5; }
   .section.grande { padding: 40px; background: #f7f8fa; }
-  .section.grande h2 {
-    font-size: 22px;
-    font-weight: 800;
-    color: #1a1a1a;
-    letter-spacing: -0.5px;
-    text-transform: none;
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-  }
-  .section.grande h2::after {
-    content: "";
-    flex: 1;
-    height: 2px;
-    background: #003DA5;
-    opacity: 0.2;
-  }
+  .section.grande h2 { font-size: 22px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.5px; text-transform: none; border-bottom: none; padding-bottom: 0; margin-bottom: 24px; display: flex; align-items: baseline; gap: 12px; }
+  .section.grande h2::after { content: ""; flex: 1; height: 2px; background: #003DA5; opacity: 0.2; }
   .section.grande.cap h2::after { background: #DC1C2E; }
   .section.grande.bajas h2::after { background: #1a1a1a; }
-
-  /* INDICADORES (cards horizontales) */
   .indicadores { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .indicador {
-    background: #f9f9f9; padding: 20px; border-left: 3px solid #003DA5;
-  }
+  .indicador { background: #f9f9f9; padding: 20px; border-left: 3px solid #003DA5; }
   .indicador.cac { border-left-color: #DC1C2E; }
   .indicador .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
   .indicador .valor-big { font-size: 32px; font-weight: 800; color: #1a1a1a; margin: 6px 0; }
@@ -107,223 +41,64 @@
   .indicador .desc strong { color: #1a1a1a; }
   .indicador .fuente { font-size: 10px; color: #999; margin-top: 10px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
   .indicador .fuente a { color: #003DA5; text-decoration: none; }
-
   .cac-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 6px; }
   .cac-grid > div { background: white; padding: 8px; border-radius: 3px; }
   .cac-grid .lbl { font-size: 10px; color: #666; text-transform: uppercase; }
   .cac-grid .val { font-size: 15px; font-weight: 700; color: #1a1a1a; }
-
-  /* MERCADO NACIONAL (4 bloques) */
-  .mercado-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .mercado-card { background: #f9f9f9; padding: 18px; border-top: 2px solid #003DA5; }
-  .mercado-card h3 { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
-  .mercado-card p { font-size: 13px; color: #333; line-height: 1.55; }
-  .mercado-card .fuente { font-size: 10px; color: #999; margin-top: 10px; padding-top: 6px; border-top: 1px solid #e0e0e0; }
-  .mercado-card .fuente a { color: #003DA5; text-decoration: none; }
-
-  /* TASAS UVA tabla */
   table.tasas { width: 100%; border-collapse: collapse; font-size: 13px; }
   table.tasas td { padding: 10px 8px; border-bottom: 1px solid #e8e8e8; }
   table.tasas .banco { font-weight: 600; color: #1a1a1a; }
   table.tasas .cond { font-size: 11px; color: #666; }
   table.tasas .tasa { text-align: right; font-weight: 700; color: #003DA5; font-size: 15px; }
   .ref { font-size: 11px; color: #666; margin-top: 12px; padding: 10px; background: #f4f4f4; border-radius: 3px; }
-
-  /* CARTERA destacado */
   .cartera-big { display: flex; align-items: baseline; gap: 14px; }
   .cartera-big .num { font-size: 56px; font-weight: 800; color: #003DA5; line-height: 1; }
   .cartera-big .lbl { font-size: 13px; color: #333; }
-
-  /* RESUMEN destacado (cards grandes) */
-  .resumen-bar {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 24px;
-    background: linear-gradient(135deg, #003DA5 0%, #002a78 100%);
-    color: white;
-    padding: 28px 32px;
-    border-radius: 8px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 16px rgba(0,61,165,0.15);
-  }
+  .resumen-bar { display: grid; grid-template-columns: auto 1fr; gap: 24px; background: linear-gradient(135deg, #003DA5 0%, #002a78 100%); color: white; padding: 28px 32px; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,61,165,0.15); }
   .resumen-bar.captaciones { background: linear-gradient(135deg, #DC1C2E 0%, #a8141f 100%); box-shadow: 0 4px 16px rgba(220,28,46,0.15); }
   .resumen-bar.bajas { background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
-
-  .resumen-bar .big {
-    font-size: 64px;
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .resumen-bar .big small {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 8px;
-    opacity: 0.85;
-  }
+  .resumen-bar .big { font-size: 64px; font-weight: 800; line-height: 1; letter-spacing: -2px; display: flex; flex-direction: column; justify-content: center; }
+  .resumen-bar .big small { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 8px; opacity: 0.85; }
   .resumen-bar .detalle-grid { display: flex; flex-direction: column; gap: 14px; justify-content: center; }
-  .resumen-bar .grupo .titulo {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    opacity: 0.75;
-    margin-bottom: 8px;
-  }
+  .resumen-bar .grupo .titulo { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; opacity: 0.75; margin-bottom: 8px; }
   .resumen-bar .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .resumen-bar .chip {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-    padding: 6px 12px;
-    border-radius: 16px;
-    font-size: 13px;
-    font-weight: 500;
-    border: 1px solid rgba(255,255,255,0.25);
-  }
+  .resumen-bar .chip { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 6px 12px; border-radius: 16px; font-size: 13px; font-weight: 500; border: 1px solid rgba(255,255,255,0.25); }
   .resumen-bar .chip strong { font-weight: 800; margin-right: 6px; font-size: 14px; }
-
-  /* TABLA detalle (grande, con jerarquía) */
   .tabla-wrap { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #ececec; }
   table.detalle { width: 100%; border-collapse: collapse; font-size: 14px; }
-  table.detalle thead th {
-    background: #f5f5f7;
-    color: #555;
-    padding: 14px 18px;
-    text-align: left;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 700;
-    border-bottom: 2px solid #e0e0e0;
-  }
-  table.detalle tbody td {
-    padding: 18px;
-    border-bottom: 1px solid #f0f0f0;
-    vertical-align: middle;
-  }
+  table.detalle thead th { background: #f5f5f7; color: #555; padding: 14px 18px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; border-bottom: 2px solid #e0e0e0; }
+  table.detalle tbody td { padding: 18px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
   table.detalle tbody tr:last-child td { border-bottom: none; }
   table.detalle tbody tr:hover { background: #fafbfd; }
-
-  table.detalle .fecha {
-    color: #888;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-    font-size: 13px;
-    font-weight: 600;
-  }
-  table.detalle .tipo {
-    font-weight: 700;
-    color: #003DA5;
-    white-space: nowrap;
-    font-size: 14px;
-    background: #e8f0ff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    display: inline-block;
-  }
+  table.detalle .fecha { color: #888; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 13px; font-weight: 600; }
+  table.detalle .tipo { font-weight: 700; color: #003DA5; white-space: nowrap; font-size: 14px; background: #e8f0ff; padding: 5px 10px; border-radius: 4px; display: inline-block; }
   table.detalle .tipo.alq { color: #DC1C2E; background: #fde8eb; }
-  table.detalle .dir {
-    font-size: 15px;
-    color: #1a1a1a;
-    line-height: 1.4;
-    font-weight: 600;
-  }
-  table.detalle .dir .ciudad {
-    display: inline-block;
-    font-size: 10px;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-left: 10px;
-    padding: 3px 8px;
-    background: #f0f0f0;
-    border-radius: 3px;
-    font-weight: 600;
-    vertical-align: 2px;
-  }
-  table.detalle .precio {
-    text-align: right;
-    font-weight: 800;
-    color: #1a1a1a;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-    font-size: 17px;
-    letter-spacing: -0.3px;
-  }
-  table.detalle .agente {
-    color: #003DA5;
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  table.detalle .var {
-    font-weight: 800;
-    color: white;
-    white-space: nowrap;
-    font-size: 14px;
-    background: #DC1C2E;
-    padding: 6px 12px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-  table.detalle .precio-baja {
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-  }
-  table.detalle .precio-baja .orig {
-    color: #aaa;
-    text-decoration: line-through;
-    font-size: 12px;
-    display: block;
-    margin-bottom: 3px;
-  }
-  table.detalle .precio-baja .nuevo {
-    color: #1a1a1a;
-    font-weight: 800;
-    font-size: 17px;
-    letter-spacing: -0.3px;
-  }
-
+  table.detalle .dir { font-size: 15px; color: #1a1a1a; line-height: 1.4; font-weight: 600; }
+  table.detalle .dir .ciudad { display: inline-block; font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.8px; margin-left: 10px; padding: 3px 8px; background: #f0f0f0; border-radius: 3px; font-weight: 600; vertical-align: 2px; }
+  table.detalle .precio { text-align: right; font-weight: 800; color: #1a1a1a; white-space: nowrap; font-variant-numeric: tabular-nums; font-size: 17px; letter-spacing: -0.3px; }
+  table.detalle .agente { color: #003DA5; font-size: 13px; font-weight: 700; white-space: nowrap; }
+  table.detalle .agente .punta2 { color: #DC1C2E; font-weight: 800; font-size: 11px; margin-left: 4px; }
+  table.detalle .var { font-weight: 800; color: white; white-space: nowrap; font-size: 14px; background: #DC1C2E; padding: 6px 12px; border-radius: 4px; display: inline-block; }
+  table.detalle .precio-baja { font-variant-numeric: tabular-nums; text-align: right; }
+  table.detalle .precio-baja .orig { color: #aaa; text-decoration: line-through; font-size: 12px; display: block; margin-bottom: 3px; }
+  table.detalle .precio-baja .nuevo { color: #1a1a1a; font-weight: 800; font-size: 17px; letter-spacing: -0.3px; }
   .fuente-tabla { font-size: 10px; color: #999; margin-top: 10px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
-
-  /* FOOTER */
-  .footer {
-    background: #1a1a1a; color: white; padding: 24px 40px;
-    text-align: center; font-size: 12px;
-  }
+  .footer { background: #1a1a1a; color: white; padding: 24px 40px; text-align: center; font-size: 12px; }
   .footer .brand-f { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
   .footer .brand-f .red { color: #DC1C2E; }
   .footer .meta { opacity: 0.7; font-size: 11px; }
-
   @media (max-width: 640px) {
     .container { max-width: 100%; }
     .header, .section { padding: 20px; }
     .section.grande { padding: 24px 16px; }
     .section.grande h2 { font-size: 18px; }
     .indicadores { grid-template-columns: 1fr; }
-
     .resumen-bar { grid-template-columns: 1fr; gap: 18px; padding: 22px 20px; }
     .resumen-bar .big { font-size: 52px; }
-    .resumen-bar .detalle-grid { gap: 12px; }
-
     .cartera-big .num { font-size: 42px; }
-
-    /* Tabla en mobile: cards stacked */
     .tabla-wrap { border-radius: 6px; }
-    table.detalle { font-size: 14px; }
     table.detalle thead { display: none; }
-    table.detalle tbody tr {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 6px 12px;
-      padding: 16px;
-      border-bottom: 1px solid #f0f0f0;
-    }
+    table.detalle tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding: 16px; border-bottom: 1px solid #f0f0f0; }
     table.detalle tbody tr:hover { background: transparent; }
     table.detalle tbody td { padding: 0; border: none; }
     table.detalle td.fecha { grid-column: 1; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
@@ -340,884 +115,891 @@
 </style>
 </head>
 <body>
-
-<!-- PANTALLA DE EXPIRACIÓN -->
-<div id="expired">
-  <div class="expired-box">
-    <div class="icon">⏱</div>
-    <div class="brand">RE/MAX <span class="red">Sudeste</span></div>
-    <h3>Este boletín ha vencido</h3>
-    <p>Esta edición del boletín ya no está disponible. Solicitá al broker la versión vigente de esta semana.</p>
-    <div class="fecha">Edición: 13–27 de mayo 2026 · vencida el 01/06/2026</div>
-  </div>
-</div>
-
-<!-- LOGIN -->
 <div id="login">
   <div class="login-box">
     <div class="brand">RE/MAX <span class="red">Sudeste</span></div>
     <div class="sub">Bahía Blanca</div>
-    <div class="desc">Boletín semanal · uso interno</div>
+    <div class="desc">Boletín quincenal · uso interno</div>
     <input type="password" id="pwd" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPwd()">
     <button onclick="checkPwd()">Ingresar</button>
     <div class="login-error" id="err"></div>
   </div>
 </div>
-
 <div class="container">
-
-  <!-- HEADER -->
   <div class="header">
     <div class="brand">RE/MAX <span class="red">Sudeste</span> · Bahía Blanca</div>
-    <div class="titulo">Boletín quincenal · 13–27 de mayo · 2026</div>
+    <div class="titulo">Boletín quincenal · 4–18 de julio · 2026</div>
     <div class="subtitulo">Informe para agentes · uso interno</div>
   </div>
 
-  <!-- INDICADORES ECONÓMICOS -->
   <div class="section">
     <h2>Indicadores económicos · hoy</h2>
     <div class="indicadores">
-
       <div class="indicador">
-        <div class="label">Inflación abril · INDEC</div>
-        <div class="valor-big">2,6%</div>
-        <div class="desc"><strong>Desaceleración —</strong> el dato más bajo desde noviembre 2025. Cortó 11 meses de tendencia alcista. Acumulado anual: <strong>12,3%</strong>. Próximo dato (mayo) se publica el jueves 12/06.</div>
-        <div class="fuente">Fuente: <a href="https://www.indec.gob.ar/uploads/informesdeprensa/ipc_05_2680B692D2F5.pdf">indec.gob.ar</a> · IPC abril 2026</div>
+        <div class="label">Inflación junio · INDEC</div>
+        <div class="valor-big">1,9%</div>
+        <div class="desc"><strong>Sigue la desaceleración —</strong> tercer mes consecutivo por debajo del 2,5%. Acumulado primer semestre: <strong>16,8%</strong> · interanual: <strong>33,5%</strong>. Vivienda, alimentos y transporte explicaron el 63,7% de la suba interanual. Próximo dato (julio) se publica a mediados de agosto.</div>
+        <div class="fuente">Fuente: <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31">indec.gob.ar</a> · IPC junio 2026</div>
       </div>
-
       <div class="indicador cac">
-        <div class="label">Índice CAC · abril 2026</div>
+        <div class="label">Índice CAC · mayo 2026</div>
         <div class="cac-grid">
-          <div><div class="lbl">Materiales</div><div class="val">+3,0%</div></div>
-          <div><div class="lbl">Mano obra</div><div class="val">+5,0%</div></div>
-          <div><div class="lbl">General</div><div class="val">+3,7%</div></div>
+          <div><div class="lbl">Materiales</div><div class="val">+2,8%</div></div>
+          <div><div class="lbl">Mano obra</div><div class="val">+2,4%</div></div>
+          <div><div class="lbl">General</div><div class="val">+2,6%</div></div>
         </div>
-        <div class="desc" style="margin-top:10px;">Acumulado anual 2026: <strong>9,1%</strong>. Superó la inflación de abril. Mano de obra impulsada por acuerdo UOCRA.</div>
-        <div class="fuente">Fuente: <a href="https://www.camarco.org.ar/2026/05/21/indicador-camarco-abril-2026/">camarco.org.ar</a> · Indicador CAMARCO abril 2026</div>
+        <div class="desc" style="margin-top:10px;">Último dato disponible de la Cámara Argentina de la Construcción (junio se publica a fin de julio). Costo de obra en línea con la inflación general.</div>
+        <div class="fuente">Fuente: <a href="https://www.camarco.org.ar/indicadores/">camarco.org.ar</a> · Indicador CAMARCO mayo 2026</div>
       </div>
-
     </div>
   </div>
 
-  <!-- TASAS UVA -->
   <div class="section">
-    <h2>Tasas hipotecarias UVA · mayo 2026</h2>
+    <h2>Tasas hipotecarias UVA · julio 2026</h2>
     <table class="tasas">
-      <tr>
-        <td><div class="banco">Banco Nación</div><div class="cond">30 años · 75% · cuenta sueldo</div></td>
-        <td class="tasa">6% + UVA</td>
-      </tr>
-      <tr>
-        <td><div class="banco">Banco Ciudad</div><div class="cond">20 años · subsidio primera vivienda &lt;80m²</div></td>
-        <td class="tasa">7,5% + UVA</td>
-      </tr>
-      <tr>
-        <td><div class="banco">BBVA</div><div class="cond">30 años · 80% · plan sueldo + seguros</div></td>
-        <td class="tasa">7,5% + UVA</td>
-      </tr>
-      <tr>
-        <td><div class="banco">ICBC</div><div class="cond">20 años · 80% · haberes</div></td>
-        <td class="tasa">6,9% + UVA</td>
-      </tr>
-      <tr>
-        <td><div class="banco">Santander</div><div class="cond">30 años · acredita sueldo</div></td>
-        <td class="tasa">9,5% + UVA</td>
-      </tr>
-      <tr>
-        <td><div class="banco">Galicia · Macro · Supervielle</div><div class="cond">20 años · 65–70%</div></td>
-        <td class="tasa">15% + UVA</td>
-      </tr>
+      <tr><td><div class="banco">Banco Nación</div><div class="cond">30 años · 75% · cuenta sueldo</div></td><td class="tasa">6% + UVA</td></tr>
+      <tr><td><div class="banco">ICBC</div><div class="cond">20 años · 75% primera vivienda · hasta USD 253.000</div></td><td class="tasa">6,9% + UVA</td></tr>
+      <tr><td><div class="banco">BBVA</div><div class="cond">30 años · 80% · plan sueldo + seguros</div></td><td class="tasa">7,5% + UVA</td></tr>
+      <tr><td><div class="banco">Credicoop</div><div class="cond">20 años · ingreso mínimo $3,5M</div></td><td class="tasa">8% + UVA</td></tr>
+      <tr><td><div class="banco">Santander · Galicia</div><div class="cond">20 años · 70% · acredita sueldo</div></td><td class="tasa">9,5% + UVA</td></tr>
+      <tr><td><div class="banco">Supervielle</div><div class="cond">15 años · 65% · ingreso mínimo $5M</div></td><td class="tasa">15% + UVA</td></tr>
     </table>
-    <div class="ref">Ref. USD 70.000 · 25% anticipo · 20 años · cuota máx. 25% ingreso familiar<br>Fuente: <a href="https://www.iproup.com/finanzas/66089-ranking-hipotecarios-uva-2026-el-banco-que-mas-te-presta-segun-tu-sueldo">iproup.com</a> · mayo 2026</div>
+    <div class="ref">Tasas por banco vigentes a julio 2026 (TNA + ajuste UVA). Las condiciones y montos máximos varían según entidad e ingresos.<br>Fuente: <a href="https://www.iprofesional.com/finanzas/453379-se-abarato-sacar-credito-hipotecario-uva-ranking-de-tasas-por-banco-y-valor-de-cuotas">iprofesional.com</a> · ranking hipotecarios UVA 2026</div>
   </div>
 
-  <!-- CARTERA -->
   <div class="section">
     <h2>Cartera publicada · RE/MAX Sudeste</h2>
     <div class="cartera-big">
-      <div class="num">778</div>
-      <div class="lbl"><strong>propiedades publicadas</strong><br><a href="https://www.remax.com.ar/sudeste" style="color:#666;font-size:11px;">remax.com.ar/sudeste</a> · al 27/05/2026</div>
+      <div class="num">816</div>
+      <div class="lbl"><strong>propiedades publicadas</strong><br><a href="https://www.remax.com.ar/sudeste" style="color:#666;font-size:11px;">remax.com.ar/sudeste</a> · al 18/07/2026</div>
     </div>
   </div>
 
-  <!-- RESERVAS -->
   <div class="section grande">
     <h2>Reservas del período</h2>
     <div class="resumen-bar">
-      <div class="big">27<small>reservas · 13–27 may</small></div>
+      <div class="big">48<small>puntas · 24 reservas · 4–18 jul</small></div>
       <div class="detalle-grid">
-        <div class="grupo">
-          <div class="titulo">Tipología</div>
-          <div class="chips"><span class="chip"><strong>12</strong>Casa</span><span class="chip"><strong>12</strong>Departamento</span><span class="chip"><strong>1</strong>PH</span><span class="chip"><strong>1</strong>Lote</span><span class="chip"><strong>1</strong>Local</span></div>
-        </div>
-        <div class="grupo">
-          <div class="titulo">Ciudad</div>
-          <div class="chips"><span class="chip"><strong>24</strong>Bahía Blanca</span><span class="chip"><strong>1</strong>Monte Hermoso</span><span class="chip"><strong>2</strong>Sin ciudad</span></div>
-        </div>
+        <div class="grupo"><div class="titulo">Tipología</div><div class="chips"><span class="chip"><strong>9</strong>Departamento</span><span class="chip"><strong>8</strong>Casa</span><span class="chip"><strong>5</strong>Lote</span><span class="chip"><strong>2</strong>PH</span></div></div>
+        <div class="grupo"><div class="titulo">Ciudad</div><div class="chips"><span class="chip"><strong>20</strong>Bahía Blanca</span><span class="chip"><strong>2</strong>Tornquist</span><span class="chip"><strong>1</strong>Coronel Rosales</span><span class="chip"><strong>1</strong>Monte Hermoso</span></div></div>
       </div>
     </div>
     <div class="tabla-wrap">
     <table class="detalle">
-      <thead>
-        <tr><th>Fecha</th><th>Tipología</th><th>Dirección · Ciudad</th><th>Agente</th></tr>
-      </thead>
+      <thead><tr><th>Fecha</th><th>Tipología</th><th>Dirección · Ciudad</th><th>Puntas (agentes)</th></tr></thead>
       <tbody>
-        
-        
         <tr>
-          <td class="fecha">27/05</td>
+          <td class="fecha">15/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Misto 500 <span class="ciudad">Tornquist</span></td>
+          <td class="agente">F. Fioriti</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="tipo alq">Departamento ALQ</span></td>
+          <td class="dir">Saavedra 26 Piso 5 Dpto B (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">F. Fioriti</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">BELGRANO  649 (8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">G. Werneke <span class="punta2">↔ G. Baratelli</span></td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Alberdi 1139 Piso PB Dpto 2 <span class="ciudad">Bahía Blanca</span></td>
+          <td class="dir">Alberdi 1139 Piso 1 Dpto 3 (B8001) <span class="ciudad">Bahía Blanca</span></td>
           <td class="agente">F. Marcaccio</td>
         </tr>
         <tr>
-          <td class="fecha">27/05</td>
+          <td class="fecha">14/07</td>
           <td><span class="tipo">Casa</span></td>
-          <td class="dir">Maldonado 860 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">P. Auday</td>
+          <td class="dir">Teniente Farias 1835 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">C. Montangie</td>
         </tr>
         <tr>
-          <td class="fecha">26/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Avenida Amancay 49 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">N. Sanchez</td>
-        </tr>
-        <tr>
-          <td class="fecha">26/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Salta 43 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">N. Sanchez</td>
-        </tr>
-        <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="tipo">PH</span></td>
-          <td class="dir">Darwin 523 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">P. Auday</td>
-        </tr>
-        <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Gorriti 781 Piso 2 Dpto 7 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">V. Gonzalez</td>
-        </tr>
-        <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Almafuerte 3134 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">C. Alarcon</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Rivadavia 1636 Piso 0 Dpto 0 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">C. Lasa</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
+          <td class="fecha">14/07</td>
           <td><span class="tipo">Lote</span></td>
-          <td class="dir">Esteban Erize 3380 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">M. Zapata</td>
+          <td class="dir">Catamarca 5520 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">S. Arboleya <span class="punta2">↔ M. Mosinczuk</span></td>
         </tr>
         <tr>
-          <td class="fecha">20/05</td>
+          <td class="fecha">14/07</td>
           <td><span class="tipo">Casa</span></td>
-          <td class="dir">Teniente Farias 1703 <span class="ciudad">Bahía Blanca</span></td>
+          <td class="dir">Humberto I 954 (B8109) <span class="ciudad">Coronel Rosales</span></td>
+          <td class="agente">M. Mosinczuk</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">IRAZUSTA S/N 1 <span class="ciudad">Monte Hermoso</span></td>
+          <td class="agente">S. Orellano</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Alvarado 309 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">M. Llano</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo alq">Departamento ALQ</span></td>
+          <td class="dir">25 de Mayo 55 Piso 1 Dpto 7 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">F. Marcaccio</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo alq">Departamento ALQ</span></td>
+          <td class="dir">LAVALLE 136 Piso 1 Dpto B (8000) <span class="ciudad">Bahía Blanca</span></td>
           <td class="agente">M. Zapata</td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">VICENTE LOPEZ  109 Piso 2 Dpto 2 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">F. Fioriti</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Local</span></td>
-          <td class="dir">Terrada 132 <span class="ciudad">Bahía Blanca</span></td>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Pilmaiquen 535 (B8002) <span class="ciudad">Bahía Blanca</span></td>
           <td class="agente">G. Baratelli</td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Moreno 1563 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">N. Brookes</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
+          <td class="fecha">08/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Estomba 143 Piso 14 Dpto H <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Ayacucho 2159 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">C. Tristan</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Alsina 623 Piso 4 Dpto D <span class="ciudad">Bahía Blanca</span></td>
+          <td class="dir">Pueyrredón 760 Piso PB Dpto 5 (B8000) <span class="ciudad">Bahía Blanca</span></td>
           <td class="agente">N. Sanchez</td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Israel 39 <span class="ciudad">Bahía Blanca</span></td>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Tornquist <span class="ciudad">Tornquist</span></td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Santa Cruz 5730 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">R. Belen</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Rufino Luro Cambaceres 2871 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">R. Belen</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo alq">Casa ALQ</span></td>
+          <td class="dir">Güemes 1000 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">V. Re <span class="punta2">↔ G. Baratelli</span></td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">PH</span></td>
+          <td class="dir">General Urquiza 232 (B8000) <span class="ciudad">Bahía Blanca</span></td>
           <td class="agente">G. Podesta</td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Segunda Brasil 512 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">C. Montangie</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
+          <td class="fecha">06/07</td>
           <td><span class="tipo alq">Departamento ALQ</span></td>
-          <td class="dir">Avenida Alem 1861 Piso 1 Dpto D <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">S. Micheletto</td>
+          <td class="dir">Saavedra 118 Piso 4 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">C. Sosa <span class="punta2">↔ J. Ruiz</span></td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
+          <td class="fecha">06/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Cabo Farina 3035 Piso 1 Dpto 1 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">C. Montangie</td>
+          <td class="dir">Estomba 143 Piso 11 Dpto 2 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">C. Sosa</td>
         </tr>
         <tr>
-          <td class="fecha">15/05</td>
+          <td class="fecha">06/07</td>
+          <td><span class="tipo">PH</span></td>
+          <td class="dir">Villarino 1400 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">A. Toro</td>
+        </tr>
+        <tr>
+          <td class="fecha">02/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Güemes 921 Piso 7 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">M. Felicioni <span class="punta2">↔ P. Auday</span></td>
+        </tr>
+        <tr>
+          <td class="fecha">02/07</td>
           <td><span class="tipo">Casa</span></td>
-          <td class="dir">Bélgica 2400 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">C. Alarcon</td>
+          <td class="dir">Entre Ríos 633 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">S. Algañaraz</td>
         </tr>
         <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="tipo alq">Casa ALQ</span></td>
-          <td class="dir">Los Cipreses  456 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">13/05</td>
+          <td class="fecha">01/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Sarmiento 343 Piso 12 Dpto 7 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">M. Diaz</td>
+          <td class="dir">Patricios 60 Piso 10 Dpto F (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="agente">G. Podesta <span class="punta2">↔ M. Mosinczuk</span></td>
         </tr>
-        <tr>
-          <td class="fecha">13/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">MALDONADO 180 <span class="ciudad">—</span></td>
-          <td class="agente">Otro</td>
-        </tr>
-        <tr>
-          <td class="fecha">13/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">CORRIENTES 30 5B + COCHERA 23 <span class="ciudad">—</span></td>
-          <td class="agente">Otro</td>
-        </tr>
-        <tr>
-          <td class="fecha">13/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Rincón 1583 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="agente">G. Werneke</td>
-        </tr>
-        <tr>
-          <td class="fecha">13/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Las Dunas 38 Piso 2 Dpto 3 <span class="ciudad">Monte Hermoso</span></td>
-          <td class="agente">V. Re</td>
-        </tr>
-
-
       </tbody>
     </table>
     </div>
-    <div class="fuente-tabla">Fuente: sistema RE/MAX Sudeste · reservas 13–27/05/2026</div>
+    <div class="fuente-tabla">Fuente: sistema RE/MAX Sudeste · reservas 4–18/07/2026 · 24 reservas = 48 puntas (cada operación con punta vendedora y compradora de la oficina) · 19 ventas · 5 alquileres · <span style="color:#DC1C2E;">↔</span> = puntas de dos agentes distintos de la oficina</div>
   </div>
 
-  <!-- CAPTACIONES -->
-  <div class="section grande cap">
-    <h2>Captaciones del período</h2>
-    <div class="resumen-bar captaciones">
-      <div class="big">44<small>captaciones · 13–27 may</small></div>
+  <div class="section grande bajas">
+    <h2>Modificaciones de valor · 4–18 julio</h2>
+    <div class="resumen-bar bajas">
+      <div class="big">27<small>bajas de precio</small></div>
       <div class="detalle-grid">
-        <div class="grupo">
-          <div class="titulo">Tipología</div>
-          <div class="chips"><span class="chip"><strong>14</strong>Departamento</span><span class="chip"><strong>12</strong>Casa</span><span class="chip"><strong>7</strong>Lote</span><span class="chip"><strong>4</strong>Local</span><span class="chip"><strong>3</strong>PH</span><span class="chip"><strong>2</strong>Otros</span><span class="chip"><strong>1</strong>Galpón</span><span class="chip"><strong>1</strong>Oficina</span></div>
-        </div>
-        <div class="grupo">
-          <div class="titulo">Ciudad</div>
-          <div class="chips"><span class="chip"><strong>33</strong>Bahía Blanca</span><span class="chip"><strong>4</strong>Monte Hermoso</span><span class="chip"><strong>3</strong>Tornquist</span><span class="chip"><strong>3</strong>Coronel Rosales</span><span class="chip"><strong>1</strong>Coronel Dorrego</span></div>
-        </div>
+        <div class="grupo"><div class="titulo">Distribución</div><div class="chips"><span class="chip"><strong>27</strong>bajas</span><span class="chip"><strong>17</strong>agentes</span><span class="chip"><strong>3</strong>subas</span></div></div>
       </div>
     </div>
     <div class="tabla-wrap">
     <table class="detalle">
-      <thead>
-        <tr><th>Fecha</th><th>Tipología</th><th>Dirección · Ciudad</th><th>Precio</th><th>Agente</th></tr>
-      </thead>
+      <thead><tr><th>Fecha</th><th>Variación</th><th>Dirección · Ciudad</th><th>Precio</th><th>Agente</th></tr></thead>
       <tbody>
-        
-        
         <tr>
-          <td class="fecha">27/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Necochea 1500 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 170.000</td>
-          <td class="agente">M. Laiuppa</td>
-        </tr>
-        <tr>
-          <td class="fecha">27/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Granaderos 1800 Piso 2 Dpto A <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 83.500</td>
-          <td class="agente">F. Fioriti</td>
-        </tr>
-        <tr>
-          <td class="fecha">27/05</td>
-          <td><span class="tipo">Galpón</span></td>
-          <td class="dir">Cramer 560 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 90.000</td>
-          <td class="agente">F. Muñiz</td>
-        </tr>
-        <tr>
-          <td class="fecha">27/05</td>
-          <td><span class="tipo">PH</span></td>
-          <td class="dir">Espora 247 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 105.000</td>
-          <td class="agente">G. Podesta</td>
-        </tr>
-        <tr>
-          <td class="fecha">27/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Av. Costanera  1449 Piso 2 Dpto B <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio">USD 250.000</td>
-          <td class="agente">L. Kremenchutzky</td>
-        </tr>
-        <tr>
-          <td class="fecha">26/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Lamadrid 92 Piso 11 Dpto C <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 79.000</td>
+          <td class="fecha">07/07</td>
+          <td><span class="var">↓72.7%</span></td>
+          <td class="dir">Belgrano 153 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 44.000</span><span class="nuevo">USD 12.000</span></td>
           <td class="agente">G. Baratelli</td>
         </tr>
         <tr>
-          <td class="fecha">26/05</td>
-          <td><span class="tipo">Lote</span></td>
-          <td class="dir">tornquist <span class="ciudad">Tornquist</span></td>
-          <td class="precio">USD 15.000</td>
-          <td class="agente">M. Morad</td>
+          <td class="fecha">07/07</td>
+          <td><span class="var">↓50.0%</span></td>
+          <td class="dir">LOTE 92 ETAPA 2 92 <span class="ciudad">Tornquist</span></td>
+          <td class="precio-baja"><span class="orig">USD 19.999</span><span class="nuevo">USD 10.000</span></td>
+          <td class="agente">F. Fioriti</td>
         </tr>
         <tr>
-          <td class="fecha">26/05</td>
+          <td class="fecha">15/07</td>
+          <td><span class="var">↓26.4%</span></td>
+          <td class="dir">Pueyrredón 5 Piso 5 Dpto b (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 106.000</span><span class="nuevo">USD 78.000</span></td>
+          <td class="agente">M. Ibañez</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="var">↓26.1%</span></td>
+          <td class="dir">Estomba 825 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 310.000</span><span class="nuevo">USD 229.000</span></td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="var">↓24.0%</span></td>
+          <td class="dir">Avellaneda 2900 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 25.000</span><span class="nuevo">USD 19.000</span></td>
+          <td class="agente">M. Mosinczuk</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="var">↓22.7%</span></td>
+          <td class="dir">LA HERRRADURA (B8168) <span class="ciudad">Tornquist</span></td>
+          <td class="precio-baja"><span class="orig">USD 22.000</span><span class="nuevo">USD 17.000</span></td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">16/07</td>
+          <td><span class="var">↓20.5%</span></td>
+          <td class="dir">Costanera 383 Piso 1 Dpto B (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio-baja"><span class="orig">USD 365.000</span><span class="nuevo">USD 290.000</span></td>
+          <td class="agente">N. Sanchez</td>
+        </tr>
+        <tr>
+          <td class="fecha">06/07</td>
+          <td><span class="var">↓16.7%</span></td>
+          <td class="dir">Rastreador Fournier 3 (B8001) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 18.000</span><span class="nuevo">USD 15.000</span></td>
+          <td class="agente">F. Prieta</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="var">↓13.4%</span></td>
+          <td class="dir">Luis María Drago (DRAGO ESQUINA COLON) 26 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 149.000</span><span class="nuevo">USD 129.000</span></td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="var">↓12.5%</span></td>
+          <td class="dir">Del Calamar y Las Toninas (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio-baja"><span class="orig">USD 40.000</span><span class="nuevo">USD 35.000</span></td>
+          <td class="agente">G. Gimenez</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="var">↓10.0%</span></td>
+          <td class="dir">Lamadrid 300 Piso 2 Dpto 0 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 110.000</span><span class="nuevo">USD 99.000</span></td>
+          <td class="agente">Y. Amalfi</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="var">↓9.8%</span></td>
+          <td class="dir">Bahia Blanca <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 49.900</span><span class="nuevo">USD 45.000</span></td>
+          <td class="agente">R. Remenar</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="var">↓9.8%</span></td>
+          <td class="dir">Antonio Alice 1295 (8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 49.900</span><span class="nuevo">USD 45.000</span></td>
+          <td class="agente">A. Castilla</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="var">↓7.1%</span></td>
+          <td class="dir">la rioja 354 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 14.000</span><span class="nuevo">USD 13.000</span></td>
+          <td class="agente">L. Konjovic</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="var">↓6.1%</span></td>
+          <td class="dir">BONNAT 1100 (8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 24.500</span><span class="nuevo">USD 23.000</span></td>
+          <td class="agente">F. Fioriti</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="var">↓5.9%</span></td>
+          <td class="dir">Faro Recalada 100 (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio-baja"><span class="orig">USD 85.000</span><span class="nuevo">USD 79.999</span></td>
+          <td class="agente">V. Re</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="var">↓5.6%</span></td>
+          <td class="dir">Gorriti 85 Piso 13 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 90.000</span><span class="nuevo">USD 85.000</span></td>
+          <td class="agente">N. Brookes</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="var">↓5.6%</span></td>
+          <td class="dir">25 de Mayo 1244 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 63.000</span><span class="nuevo">USD 59.500</span></td>
+          <td class="agente">F. Fioriti</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="var">↓5.5%</span></td>
+          <td class="dir">Primera Junta 726 (B8105) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 55.000</span><span class="nuevo">USD 52.000</span></td>
+          <td class="agente">L. Konjovic</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="var">↓4.9%</span></td>
+          <td class="dir">Polidoro Coulin 600 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 72.000</span><span class="nuevo">USD 68.500</span></td>
+          <td class="agente">L. Konjovic</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="var">↓3.7%</span></td>
+          <td class="dir">Pampa Central 930 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 83.000</span><span class="nuevo">USD 79.900</span></td>
+          <td class="agente">F. Marcaccio</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="var">↓3.4%</span></td>
+          <td class="dir">Gorriti 85 Piso 10 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 88.000</span><span class="nuevo">USD 85.000</span></td>
+          <td class="agente">M. Marchesi</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="var">↓3.4%</span></td>
+          <td class="dir">San Martín 679 Piso 6 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 88.000</span><span class="nuevo">USD 85.000</span></td>
+          <td class="agente">M. Marchesi</td>
+        </tr>
+        <tr>
+          <td class="fecha">06/07</td>
+          <td><span class="var">↓3.4%</span></td>
+          <td class="dir">Esteban Dufaur 247 Piso 1 Dpto 14 <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio-baja"><span class="orig">USD 44.000</span><span class="nuevo">USD 42.500</span></td>
+          <td class="agente">F. Prieta</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="var">↓2.6%</span></td>
+          <td class="dir">Pedro Pico 300 Piso 0 Dpto 000 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 38.000</span><span class="nuevo">USD 37.000</span></td>
+          <td class="agente">Y. Amalfi</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="var">↓2.4%</span></td>
+          <td class="dir">Terrada 1318 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 79.900</span><span class="nuevo">USD 78.000</span></td>
+          <td class="agente">K. Valentini</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="var">↓1.9%</span></td>
+          <td class="dir">Dorrego 100 Piso 11 Dpto B (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio-baja"><span class="orig">USD 155.000</span><span class="nuevo">USD 152.000</span></td>
+          <td class="agente">M. Ibañez</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="ref" style="margin-top:14px;">También se registraron <strong>3 subas</strong> de precio en el período: Patricios 60 Piso 10 Dpto F (B8000) (Bahía Blanca) USD 74.000 → USD 78.000 ↑5.4% · INDIADA Y BERTA GASTAÑAGA (B8002) (Bahía Blanca) USD 22.500 → USD 23.500 ↑4.4% · General Artigas 1754 (B8000) (Bahía Blanca) USD 78.000 → USD 81.000 ↑3.8%</div>
+    <div class="fuente-tabla">Fuente: sistema RE/MAX Sudeste · variación de precios 4–18/07/2026 · variación total desde el precio original de publicación</div>
+  </div>
+
+  <div class="section grande cap">
+    <h2>Captaciones del período</h2>
+    <div class="resumen-bar captaciones">
+      <div class="big">60<small>captaciones · 4–18 jul</small></div>
+      <div class="detalle-grid">
+        <div class="grupo"><div class="titulo">Tipología</div><div class="chips"><span class="chip"><strong>20</strong>Casa</span><span class="chip"><strong>18</strong>Departamento</span><span class="chip"><strong>17</strong>Lote</span><span class="chip"><strong>2</strong>Local</span><span class="chip"><strong>2</strong>PH</span><span class="chip"><strong>1</strong>Fondo de comercio</span></div></div>
+        <div class="grupo"><div class="titulo">Ciudad</div><div class="chips"><span class="chip"><strong>44</strong>Bahía Blanca</span><span class="chip"><strong>7</strong>Monte Hermoso</span><span class="chip"><strong>3</strong>Coronel Rosales</span><span class="chip"><strong>3</strong>Tornquist</span><span class="chip"><strong>3</strong>Sin ciudad</span></div></div>
+      </div>
+    </div>
+    <div class="tabla-wrap">
+    <table class="detalle">
+      <thead><tr><th>Fecha</th><th>Tipología</th><th>Dirección · Ciudad</th><th>Precio</th><th>Agente</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="fecha">17/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">NEUQUEN 447 Piso PB Dpto A <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 64.900</td>
-          <td class="agente">F. Fioriti</td>
+          <td class="dir">Av. Argentina 50 Piso 5 Dpto G (B8105) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 40.000</td>
+          <td class="agente">R. Remenar</td>
         </tr>
         <tr>
-          <td class="fecha">26/05</td>
-          <td><span class="tipo alq">Departamento ALQ</span></td>
-          <td class="dir">Gorriti 834 Piso PB Dpto A <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">ARS $850.000</td>
-          <td class="agente">F. Fioriti</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Lote</span></td>
-          <td class="dir">Charcas 5200 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 37.500</td>
-          <td class="agente">F. Fioriti</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
+          <td class="fecha">17/07</td>
           <td><span class="tipo">Casa</span></td>
-          <td class="dir">Cervantes 444 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 90.000</td>
-          <td class="agente">M. Viso</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Otros Inmuebles</span></td>
-          <td class="dir">José M. Carrega 3201 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 2.500.000</td>
-          <td class="agente">F. Muñiz</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Manuel de Molina 816 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 49.000</td>
-          <td class="agente">F. Muñiz</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Naposta 162 Piso 1 Dpto D <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 65.000</td>
-          <td class="agente">S. Orellano</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Lote</span></td>
-          <td class="dir">Misto 500 <span class="ciudad">Tornquist</span></td>
-          <td class="precio">USD 35.000</td>
-          <td class="agente">F. Fioriti</td>
-        </tr>
-        <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Lote</span></td>
-          <td class="dir">Lote en Monte Hermoso <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio">USD 22.000</td>
+          <td class="dir">Los Adobes 1262 (B8002) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 110.000</td>
           <td class="agente">J. Litwin</td>
         </tr>
         <tr>
-          <td class="fecha">21/05</td>
+          <td class="fecha">17/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Lamadrid 523 Piso 5 Dpto A (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 175.000</td>
+          <td class="agente">J. Litwin</td>
+        </tr>
+        <tr>
+          <td class="fecha">17/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Rodríguez Peña y Bernabé Rodriguez 700 (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 239.000</td>
+          <td class="agente">J. Litwin</td>
+        </tr>
+        <tr>
+          <td class="fecha">17/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Calle El Cardal 1000 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 92.000</td>
+          <td class="agente">G. Baratelli</td>
+        </tr>
+        <tr>
+          <td class="fecha">16/07</td>
           <td><span class="tipo">Local</span></td>
-          <td class="dir">Rafael Obligado 5602 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 54.900</td>
+          <td class="dir">Patagones 550 (B8109) <span class="ciudad">Coronel Rosales</span></td>
+          <td class="precio">USD 57.000</td>
+          <td class="agente">J. Montero</td>
+        </tr>
+        <tr>
+          <td class="fecha">16/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">s/n (8168) <span class="ciudad">Tornquist</span></td>
+          <td class="precio">USD 32.000</td>
+          <td class="agente">C. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">16/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Zapiola 434 Piso 1 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 220.000</td>
+          <td class="agente">M. Felicioni</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Moreno 23 Piso 3 Dpto F (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 93.000</td>
+          <td class="agente">M. Zapata</td>
+        </tr>
+        <tr>
+          <td class="fecha">15/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Jesus Maria 538 (B8109) <span class="ciudad">Coronel Rosales</span></td>
+          <td class="precio">USD 71.000</td>
+          <td class="agente">J. Montero</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Terrada 780 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 75.000</td>
+          <td class="agente">R. Remenar</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Av. Argentina 841 Piso 0 Dpto c (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 57.000</td>
+          <td class="agente">N. Brookes</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Charlone 846 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 66.000</td>
+          <td class="agente">S. Orellano</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Hugony 2900 Piso 0 Dpto 0 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 130.000</td>
+          <td class="agente">M. Mosinczuk</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">BELGRANO  649 (8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 170.000</td>
+          <td class="agente">G. Werneke</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Bahia Blanca <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 45.000</td>
+          <td class="agente">F. Marcaccio</td>
+        </tr>
+        <tr>
+          <td class="fecha">14/07</td>
+          <td><span class="tipo">Local</span></td>
+          <td class="dir">Martiniano Rodriguez 340 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 120.000</td>
+          <td class="agente">F. Fioriti</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Almafuerte 2962 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 44.900</td>
           <td class="agente">J. Ruiz</td>
         </tr>
         <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="tipo">Oficina</span></td>
-          <td class="dir">Drago  23 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 14.000</td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Local</span></td>
-          <td class="dir">Güemes 958 Piso 1 Dpto 3 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 90.000</td>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Zapiola 222 Piso 1 Dpto A (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 350.000</td>
           <td class="agente">L. Kremenchutzky</td>
         </tr>
         <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Vieytes 1045 Piso 2 Dpto 8 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 90.000</td>
-          <td class="agente">L. Kremenchutzky</td>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Doctor Raúl R. Alfonsín 535 (B8135) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 155.000</td>
+          <td class="agente">J. Montoli</td>
         </tr>
         <tr>
-          <td class="fecha">20/05</td>
+          <td class="fecha">13/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Saavedra 26 Piso 1 Dpto 3 <span class="ciudad">Bahía Blanca</span></td>
+          <td class="dir">Gorriti 6 Piso 10 Dpto 4 y 5 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 135.000</td>
+          <td class="agente">G. Gimenez</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Fitz Roy 200 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 189.000</td>
+          <td class="agente">F. Fioriti</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Avellaneda 2016 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 79.000</td>
+          <td class="agente">R. Belen</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Paunero 1870 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 89.900</td>
+          <td class="agente">K. Valentini</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Libertad 350 (B8105) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 45.000</td>
+          <td class="agente">C. Alarcon</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Alvarado 309 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 128.000</td>
+          <td class="agente">M. Llano</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Batitú (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 35.000</td>
+          <td class="agente">C. Alarcon</td>
+        </tr>
+        <tr>
+          <td class="fecha">13/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Brown 1933 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 58.000</td>
+          <td class="agente">L. Konjovic</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Bartolomé Mitre 1252 Piso 1 Dpto 15 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 59.900</td>
+          <td class="agente">P. Auday</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Santiago del Estero 321 Piso 0 Dpto A (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 88.000</td>
+          <td class="agente">L. Konjovic</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">JARDIN DE LA ANGELICA LOTE 15  (B7540) <span class="ciudad">—</span></td>
+          <td class="precio">USD 23.500</td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">JARDIN DE LA ANGELICA LOTE 16 (B7540) <span class="ciudad">—</span></td>
+          <td class="precio">USD 25.000</td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Presbitero Juan Bautista Biggio 892 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 18.000</td>
+          <td class="agente">G. Podesta</td>
+        </tr>
+        <tr>
+          <td class="fecha">08/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">piscicultura lote 50 50 (B7540) <span class="ciudad">—</span></td>
+          <td class="precio">USD 30.000</td>
+          <td class="agente">J. Sosa</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Bahia Blanca <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 31.000</td>
+          <td class="agente">E. Tomasi</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">General Artigas 1754 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 81.000</td>
+          <td class="agente">P. Auday</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">General Artigas 1742 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 40.000</td>
+          <td class="agente">P. Auday</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Tucumán 62 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 200.000</td>
+          <td class="agente">F. Prieta</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">PH</span></td>
+          <td class="dir">Chiclana 437 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 120.000</td>
+          <td class="agente">G. Werneke</td>
+        </tr>
+        <tr>
+          <td class="fecha">07/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Thompson 1350 (8000) <span class="ciudad">Bahía Blanca</span></td>
           <td class="precio">USD 55.000</td>
           <td class="agente">F. Prieta</td>
         </tr>
         <tr>
-          <td class="fecha">20/05</td>
+          <td class="fecha">07/07</td>
           <td><span class="tipo">Lote</span></td>
-          <td class="dir">Cacique Calpisqui <span class="ciudad">Tornquist</span></td>
-          <td class="precio">USD 39.000</td>
-          <td class="agente">J. Litwin</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Local</span></td>
-          <td class="dir">San Martín 346 <span class="ciudad">Coronel Rosales</span></td>
-          <td class="precio">USD 90.000</td>
-          <td class="agente">J. Montero</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Martiniano Rodriguez 1322 Piso 1 Dpto 4 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 69.000</td>
-          <td class="agente">G. Baratelli</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Lote</span></td>
-          <td class="dir">MAYOR CLERICE  800 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 550.000</td>
-          <td class="agente">M. Morad</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Vieytes 1045 Piso 3 Dpto 2 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 110.000</td>
-          <td class="agente">L. Kremenchutzky</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Río Gallegos 137 Piso 2 Dpto A <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio">USD 130.000</td>
-          <td class="agente">J. Litwin</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">PH</span></td>
-          <td class="dir">11 de Abril 61 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 210.000</td>
-          <td class="agente">R. Remenar</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Casanova 420 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 199.000</td>
-          <td class="agente">G. Podesta</td>
-        </tr>
-        <tr>
-          <td class="fecha">18/05</td>
-          <td><span class="tipo">Lote</span></td>
-          <td class="dir">Lote en Bahía Blanca <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 35.000</td>
-          <td class="agente">J. Montoli</td>
-        </tr>
-        <tr>
-          <td class="fecha">18/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Dinamarca y Echeverria 800 <span class="ciudad">Coronel Dorrego</span></td>
-          <td class="precio">USD 150.000</td>
-          <td class="agente">P. Franceschini</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">PH</span></td>
-          <td class="dir">Juan Molina 253 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 65.000</td>
-          <td class="agente">M. Mosinczuk</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">Otros Inmuebles</span></td>
-          <td class="dir">WALICH 465 <span class="ciudad">Coronel Rosales</span></td>
-          <td class="precio">USD 200.000</td>
-          <td class="agente">D. Vitale</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">Local</span></td>
-          <td class="dir">Vicente López 80 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 46.000</td>
-          <td class="agente">S. Battistina</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Patagones 280 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 50.000</td>
-          <td class="agente">V. Gonzalez</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">dufourd 1000 <span class="ciudad">Coronel Rosales</span></td>
-          <td class="precio">USD 85.000</td>
-          <td class="agente">F. Fioriti</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Almafuerte 486 Piso 10 Dpto A <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 85.000</td>
-          <td class="agente">K. Valentini</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Santiago del Estero 300 Piso 2 Dpto B <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 59.000</td>
-          <td class="agente">L. Konjovic</td>
-        </tr>
-        <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Moreno 1563 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 28.000</td>
-          <td class="agente">N. Brookes</td>
-        </tr>
-        <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Pablo Pandeles 931 <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio">USD 120.000</td>
-          <td class="agente">J. Sosa</td>
-        </tr>
-        <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="tipo alq">Casa ALQ</span></td>
-          <td class="dir">Los Cipreses  456 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 2.000</td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="tipo">Casa</span></td>
-          <td class="dir">Guatemala 19 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 245.000</td>
+          <td class="dir">República de Siria 3550 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 25.000</td>
           <td class="agente">F. Prieta</td>
         </tr>
         <tr>
-          <td class="fecha">13/05</td>
+          <td class="fecha">07/07</td>
           <td><span class="tipo">Casa</span></td>
-          <td class="dir">Fray Mamerto Esquiú 3 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 118.000</td>
-          <td class="agente">A. Toro</td>
+          <td class="dir">Doctor Sixto Laspiur 1400 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 85.000</td>
+          <td class="agente">V. Gonzalez</td>
         </tr>
         <tr>
-          <td class="fecha">13/05</td>
+          <td class="fecha">07/07</td>
           <td><span class="tipo">Departamento</span></td>
-          <td class="dir">Alberdi 1139 Piso PB Dpto 2 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio">USD 68.000</td>
-          <td class="agente">F. Marcaccio</td>
-        </tr>
-
-
-      </tbody>
-    </table>
-    </div>
-    <div class="fuente-tabla">Fuente: sistema RE/MAX Sudeste · captaciones 13–27/05/2026</div>
-  </div>
-
-  <!-- BAJAS -->
-  <div class="section grande bajas">
-    <h2>Modificaciones de valor · 13–27 mayo</h2>
-    <div class="resumen-bar bajas">
-      <div class="big">26<small>propiedades</small></div>
-      <div class="detalle-grid">
-        <div class="grupo">
-          <div class="titulo">Distribución</div>
-          <div class="chips"><span class="chip"><strong>16</strong>agentes</span><span class="chip"><strong>4</strong>localidades</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="tabla-wrap">
-    <table class="detalle">
-      <thead>
-        <tr><th>Fecha</th><th>Variación</th><th>Dirección · Ciudad</th><th>Precio</th><th>Agente</th></tr>
-      </thead>
-      <tbody>
-        
-        
-        <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="var">↓36.9%</span></td>
-          <td class="dir">Propiedad sin dirección cargada <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 420.000</span><span class="nuevo">USD 265.000</span></td>
-          <td class="agente">J. Sosa</td>
+          <td class="dir">Italia 700 Piso 0 Dpto 0 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 95.000</td>
+          <td class="agente">V. Gonzalez</td>
         </tr>
         <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="var">↓28.1%</span></td>
-          <td class="dir">Caronti 739 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">ARS 1.112.000</span><span class="nuevo">ARS 800.000</span></td>
-          <td class="agente">F. Fioriti</td>
+          <td class="fecha">06/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">SKUA LOTE 17 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 35.000</td>
+          <td class="agente">N. Pavetto</td>
         </tr>
         <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="var">↓25.8%</span></td>
-          <td class="dir">Esteban Dufaur 1300 <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 120.000</span><span class="nuevo">USD 89.000</span></td>
-          <td class="agente">J. Litwin</td>
+          <td class="fecha">06/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Calle 18 ( entre 1 y 13) (8109) <span class="ciudad">Coronel Rosales</span></td>
+          <td class="precio">USD 39.000</td>
+          <td class="agente">M. Zapata</td>
         </tr>
         <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="var">↓25.0%</span></td>
-          <td class="dir">El Calden y Pilcaniyen 2400 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 40.000</span><span class="nuevo">USD 30.000</span></td>
-          <td class="agente">R. Belen</td>
+          <td class="fecha">06/07</td>
+          <td><span class="tipo">PH</span></td>
+          <td class="dir">General Urquiza 232 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 105.000</td>
+          <td class="agente">G. Podesta</td>
         </tr>
         <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓25.0%</span></td>
-          <td class="dir">Avenida Leandro Niceforo Alem 676 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 280.000</span><span class="nuevo">USD 210.000</span></td>
-          <td class="agente">V. Re</td>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Donado 537 Piso 1 Dpto B (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">ARS $750.000</td>
+          <td class="agente">M. Felicioni</td>
         </tr>
         <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓21.3%</span></td>
-          <td class="dir">mitre  995 <span class="ciudad">Coronel Rosales</span></td>
-          <td class="precio-baja"><span class="orig">USD 69.900</span><span class="nuevo">USD 54.999</span></td>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Las Ballenas  461 (8000) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 60.000</td>
+          <td class="agente">J. Gomez</td>
+        </tr>
+        <tr>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">SOLER  28 Piso 1 Dpto B (8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 260.000</td>
+          <td class="agente">D. Vitale</td>
+        </tr>
+        <tr>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Alsina 318 Piso 5 Dpto 0 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 240.000</td>
+          <td class="agente">V. Gonzalez</td>
+        </tr>
+        <tr>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Pueyrredón 760 Piso PB Dpto 5 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 42.000</td>
+          <td class="agente">N. Sanchez</td>
+        </tr>
+        <tr>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Terrada 2437 (B8003) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 105.000</td>
+          <td class="agente">C. Alarcon</td>
+        </tr>
+        <tr>
+          <td class="fecha">03/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">Tornquist <span class="ciudad">Tornquist</span></td>
+          <td class="precio">USD 37.000</td>
+          <td class="agente">L. Konjovic</td>
+        </tr>
+        <tr>
+          <td class="fecha">02/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Rio Limay esquina Los Fresnos 890 (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 110.000</td>
+          <td class="agente">M. Baltar</td>
+        </tr>
+        <tr>
+          <td class="fecha">02/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Esteban Dufaur 200 Piso 2 Dpto 0 (B8153) <span class="ciudad">Monte Hermoso</span></td>
+          <td class="precio">USD 55.000</td>
+          <td class="agente">Y. Amalfi</td>
+        </tr>
+        <tr>
+          <td class="fecha">02/07</td>
+          <td><span class="tipo">Fondo de comercio</span></td>
+          <td class="dir">Ruta Provincial 76 <span class="ciudad">Tornquist</span></td>
+          <td class="precio">USD 1.300.000</td>
           <td class="agente">P. Auday</td>
         </tr>
         <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓20.0%</span></td>
-          <td class="dir">Punta Mogotes <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 15.000</span><span class="nuevo">USD 12.000</span></td>
-          <td class="agente">N. Brookes</td>
+          <td class="fecha">02/07</td>
+          <td><span class="tipo">Casa</span></td>
+          <td class="dir">Darwin 517 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 155.000</td>
+          <td class="agente">J. Montoli</td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="var">↓18.2%</span></td>
-          <td class="dir">Tornquist <span class="ciudad">Tornquist</span></td>
-          <td class="precio-baja"><span class="orig">USD 22.000</span><span class="nuevo">USD 18.000</span></td>
-          <td class="agente">R. Remenar</td>
+          <td class="fecha">02/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">ISABEL LA CATOLICA 3021 Piso 1 Dpto 4 <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 26.000</td>
+          <td class="agente">M. Laiuppa</td>
         </tr>
         <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="var">↓16.3%</span></td>
-          <td class="dir">Ruta Nacional 229 <span class="ciudad">Coronel Rosales</span></td>
-          <td class="precio-baja"><span class="orig">USD 19.000</span><span class="nuevo">USD 15.900</span></td>
-          <td class="agente">R. Belen</td>
+          <td class="fecha">01/07</td>
+          <td><span class="tipo">Departamento</span></td>
+          <td class="dir">Güemes 921 Piso 7 Dpto 1 (B8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 140.000</td>
+          <td class="agente">M. Felicioni</td>
         </tr>
         <tr>
-          <td class="fecha">21/05</td>
-          <td><span class="var">↓14.3%</span></td>
-          <td class="dir">Santa Cruz 5730 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 35.000</span><span class="nuevo">USD 30.000</span></td>
-          <td class="agente">R. Belen</td>
+          <td class="fecha">01/07</td>
+          <td><span class="tipo">Lote</span></td>
+          <td class="dir">El Resero (8000) <span class="ciudad">Bahía Blanca</span></td>
+          <td class="precio">USD 34.000</td>
+          <td class="agente">F. Prieta</td>
         </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓13.4%</span></td>
-          <td class="dir">Ruta Nacional 33 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 41.000</span><span class="nuevo">USD 35.500</span></td>
-          <td class="agente">C. Alarcon</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓13.3%</span></td>
-          <td class="dir">Ruta Nacional 33 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 48.000</span><span class="nuevo">USD 41.600</span></td>
-          <td class="agente">C. Alarcon</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="var">↓13.0%</span></td>
-          <td class="dir">Valle Encantado 173 Piso PB Dpto B <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 92.000</span><span class="nuevo">USD 80.000</span></td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓12.6%</span></td>
-          <td class="dir">Ruta Nacional 33 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 35.000</span><span class="nuevo">USD 30.600</span></td>
-          <td class="agente">C. Alarcon</td>
-        </tr>
-        <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="var">↓12.1%</span></td>
-          <td class="dir">Mitre y Montevideo <span class="ciudad">Tornquist</span></td>
-          <td class="precio-baja"><span class="orig">USD 33.000</span><span class="nuevo">USD 29.000</span></td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="var">↓11.8%</span></td>
-          <td class="dir">Berutti 853 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 68.000</span><span class="nuevo">USD 59.998</span></td>
-          <td class="agente">F. Muñiz</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="var">↓11.8%</span></td>
-          <td class="dir">Yatasto 629 Piso 3 Dpto 12 <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 170.000</span><span class="nuevo">USD 150.000</span></td>
-          <td class="agente">M. Scafati</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="var">↓10.0%</span></td>
-          <td class="dir">Punta Mogotes 1674 <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 150.000</span><span class="nuevo">USD 135.000</span></td>
-          <td class="agente">M. Baltar</td>
-        </tr>
-        <tr>
-          <td class="fecha">20/05</td>
-          <td><span class="var">↓9.5%</span></td>
-          <td class="dir">Av. Argentina 6 Piso 3 Dpto E <span class="ciudad">Monte Hermoso</span></td>
-          <td class="precio-baja"><span class="orig">USD 105.000</span><span class="nuevo">USD 95.000</span></td>
-          <td class="agente">G. Podesta</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓8.1%</span></td>
-          <td class="dir">Rastreador Fournier y Molina Campos <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 37.000</span><span class="nuevo">USD 34.000</span></td>
-          <td class="agente">G. Gimenez</td>
-        </tr>
-        <tr>
-          <td class="fecha">19/05</td>
-          <td><span class="var">↓7.4%</span></td>
-          <td class="dir">Avenida Amancay 532 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 135.000</span><span class="nuevo">USD 125.000</span></td>
-          <td class="agente">G. Podesta</td>
-        </tr>
-        <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="var">↓6.7%</span></td>
-          <td class="dir">Don Bosco 465 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 105.000</span><span class="nuevo">USD 98.000</span></td>
-          <td class="agente">R. Belen</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓5.6%</span></td>
-          <td class="dir">Güemes 931 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 9.000</span><span class="nuevo">USD 8.500</span></td>
-          <td class="agente">K. Valentini</td>
-        </tr>
-        <tr>
-          <td class="fecha">15/05</td>
-          <td><span class="var">↓5.3%</span></td>
-          <td class="dir">Coronel Falcón 1962 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 95.000</span><span class="nuevo">USD 90.000</span></td>
-          <td class="agente">G. Gimenez</td>
-        </tr>
-        <tr>
-          <td class="fecha">22/05</td>
-          <td><span class="var">↓5.1%</span></td>
-          <td class="dir">Calle los Pozos 485 <span class="ciudad">Coronel Rosales</span></td>
-          <td class="precio-baja"><span class="orig">USD 79.000</span><span class="nuevo">USD 75.000</span></td>
-          <td class="agente">J. Litwin</td>
-        </tr>
-        <tr>
-          <td class="fecha">14/05</td>
-          <td><span class="var">↓2.5%</span></td>
-          <td class="dir">Alférez Sobral  900 <span class="ciudad">Bahía Blanca</span></td>
-          <td class="precio-baja"><span class="orig">USD 40.000</span><span class="nuevo">USD 39.000</span></td>
-          <td class="agente">S. Arboleya</td>
-        </tr>
-
-
       </tbody>
     </table>
     </div>
-    <div class="fuente-tabla">Fuente: sistema RE/MAX Sudeste · variación de precios 13–27/05/2026</div>
+    <div class="fuente-tabla">Fuente: sistema RE/MAX Sudeste · captaciones 4–18/07/2026 (se excluyeron 3 cargas con precio USD 1)</div>
   </div>
 
-  <!-- FOOTER -->
   <div class="footer">
     <div class="brand-f">RE/MAX <span class="red">Sudeste</span></div>
-    <div class="meta">Bahía Blanca · uso interno · mayo 2026</div>
+    <div class="meta">Bahía Blanca · uso interno · julio 2026</div>
   </div>
-
 </div>
-
 <script>
-// Fecha de expiración: lunes 18/05/2026 a las 00:00
-var EXPIRA = new Date('2026-06-01T00:00:00').getTime();
-var AHORA = new Date().getTime();
-
 function checkPwd(){
   var v = document.getElementById('pwd').value;
   if(v === 'sudeste2026'){
     document.getElementById('login').classList.add('hidden');
-    sessionStorage.setItem('auth','1');
   } else {
     document.getElementById('err').innerText = 'Contraseña incorrecta';
   }
 }
-
-if (AHORA >= EXPIRA) {
-  document.getElementById('expired').classList.add('show');
-  document.getElementById('login').style.display = 'none';
-  document.querySelector('.container').style.display = 'none';
-} else {
-  if(sessionStorage.getItem('auth')==='1'){
-    document.getElementById('login').classList.add('hidden');
-  }
-  document.getElementById('pwd').focus();
-}
+document.getElementById('pwd').focus();
 </script>
-
 </body>
 </html>
